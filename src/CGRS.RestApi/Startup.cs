@@ -45,6 +45,8 @@ namespace CGRS.RestApi
 
             app.UseRouting();
 
+            app.UseMiddleware(typeof(ExceptionHandlerMiddleware));
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
