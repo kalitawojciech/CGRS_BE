@@ -12,7 +12,7 @@ namespace CGRS.RestApi.Controllers
         #region Queries
 
         [HttpGet("")]
-        public async Task<IActionResult> GetAllUsersourses()
+        public async Task<IActionResult> GetAllUsers()
         {
             return Ok();
         }
