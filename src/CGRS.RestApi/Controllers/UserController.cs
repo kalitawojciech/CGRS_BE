@@ -8,7 +8,6 @@ namespace CGRS.RestApi.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-
         #region Queries
 
         [HttpGet("")]
