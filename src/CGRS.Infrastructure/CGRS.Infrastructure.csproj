@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.11" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -17,6 +18,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CGRS.Application\CGRS.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Database\Repositories\Interfaces\" />
   </ItemGroup>
 
 </Project>

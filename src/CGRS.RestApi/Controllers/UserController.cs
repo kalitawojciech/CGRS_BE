@@ -8,11 +8,10 @@ namespace CGRS.RestApi.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-
         #region Queries
 
         [HttpGet("")]
-        public async Task<IActionResult> GetAllUsersourses()
+        public async Task<IActionResult> GetAllUsers()
         {
             return Ok();
         }
