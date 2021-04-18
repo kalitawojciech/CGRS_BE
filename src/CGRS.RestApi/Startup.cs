@@ -1,4 +1,8 @@
-﻿using CGRS.Infrastructure.Database;
+﻿using CGRS.Application.Categories.Commands;
+using CGRS.Domain.Interfaces;
+using CGRS.Infrastructure.Database;
+using CGRS.Infrastructure.Domain;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Npgsql;
 
 namespace CGRS.RestApi
 {
@@ -22,7 +25,12 @@ namespace CGRS.RestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMediatR(typeof(CreateCategoryCommand).Assembly);
             services.AddControllers();
+
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+
+            var x = Configuration.GetConnectionString("ConnectionString");
 
             services.AddDbContext<AppDbContext>(o =>
             {
