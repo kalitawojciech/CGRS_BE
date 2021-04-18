@@ -20,8 +20,4 @@
     <ProjectReference Include="..\CGRS.Domain\CGRS.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Categories\Queries\" />
-  </ItemGroup>
-
 </Project>
