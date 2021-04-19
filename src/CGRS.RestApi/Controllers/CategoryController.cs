@@ -36,5 +36,18 @@ namespace CGRS.RestApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] UpdateCategoryRequest request)
+        {
+            await _mediator.Send(
+                new UpdateCategoryCommand(
+                    request.Id,
+                    request.Name,
+                    request.Description,
+                    request.IsActive));
+
+            return Ok();
+        }
     }
 }

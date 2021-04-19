@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CGRS.Domain.Entities;
 using CGRS.Domain.Interfaces;
@@ -21,9 +23,27 @@ namespace CGRS.Infrastructure.Domain
             return await _context.Categories.ToListAsync();
         }
 
+        public async Task<Category> GetById(Guid id)
+        {
+            return await _context.Categories
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task Add(Category category)
         {
             await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
+        }
+
+        public void Delete(Category category)
+        {
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+        }
+
+        public async Task SaveChanges()
+        {
             await _context.SaveChangesAsync();
         }
     }
