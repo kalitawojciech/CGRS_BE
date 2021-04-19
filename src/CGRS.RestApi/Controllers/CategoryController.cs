@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CGRS.Application.Categories.Commands;
-using CGRS.Domain.Entities;
+using CGRS.Application.Categories.Queries;
 using CGRS.Domain.Interfaces;
 using CGRS.RestApi.RestModels.Categories;
 using MediatR;
@@ -28,6 +27,14 @@ namespace CGRS.RestApi.Controllers
             await _mediator.Send(new CreateCategoryCommand(request.Name, request.Description));
 
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _mediator.Send(new GetAllCategoriesQuery());
+
+            return Ok(result);
         }
     }
 }
