@@ -6,7 +6,7 @@ namespace CGRS.RestApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         #region Queries
 
