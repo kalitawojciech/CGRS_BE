@@ -10,15 +10,13 @@ namespace CGRS.RestApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CategoryController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryController(IMediator mediator, ICategoryRepository categoryRepository)
+        public CategoriesController(IMediator mediator)
         {
             _mediator = mediator;
-            _categoryRepository = categoryRepository;
         }
 
         [HttpPost]

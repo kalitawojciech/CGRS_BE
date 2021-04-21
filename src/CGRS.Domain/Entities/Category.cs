@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CGRS.Domain.Entities
 {
@@ -11,5 +12,7 @@ namespace CGRS.Domain.Entities
         public string Description { get; set; }
 
         public bool IsActive { get; set; }
+
+        public virtual ICollection<Game> Games { get; set; }
     }
 }

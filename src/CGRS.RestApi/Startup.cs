@@ -29,6 +29,7 @@ namespace CGRS.RestApi
             services.AddControllers();
 
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IGameRepository, GameRepository>();
 
             var x = Configuration.GetConnectionString("ConnectionString");
 
