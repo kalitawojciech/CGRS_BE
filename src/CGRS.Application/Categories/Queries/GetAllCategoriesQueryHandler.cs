@@ -18,7 +18,7 @@ namespace CGRS.Application.Categories.Queries
 
         public async Task<List<Category>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
         {
-            List<Category> categoriesFromDb = await _categoryRepository.GetAll();
+            List<Category> categoriesFromDb = await _categoryRepository.GetAllAsync();
 
             return categoriesFromDb;
         }

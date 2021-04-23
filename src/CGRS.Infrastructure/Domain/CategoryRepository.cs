@@ -18,19 +18,19 @@ namespace CGRS.Infrastructure.Domain
             _context = context;
         }
 
-        public async Task<List<Category>> GetAll()
+        public async Task<List<Category>> GetAllAsync()
         {
             return await _context.Categories.ToListAsync();
         }
 
-        public async Task<Category> GetById(Guid id)
+        public async Task<Category> GetByIdAsync(Guid id)
         {
             return await _context.Categories
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task Add(Category category)
+        public async Task AddAsync(Category category)
         {
             await _context.Categories.AddAsync(category);
             await _context.SaveChangesAsync();
@@ -42,7 +42,7 @@ namespace CGRS.Infrastructure.Domain
             _context.SaveChanges();
         }
 
-        public async Task SaveChanges()
+        public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }

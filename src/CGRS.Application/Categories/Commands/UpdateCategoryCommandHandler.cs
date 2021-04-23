@@ -16,13 +16,13 @@ namespace CGRS.Application.Categories.Commands
 
         public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var categoryFromDb = await _categoryRepository.GetById(request.Id);
+            var categoryFromDb = await _categoryRepository.GetByIdAsync(request.Id);
 
             categoryFromDb.Name = request.Name;
             categoryFromDb.Description = request.Description;
             categoryFromDb.IsActive = request.IsActive;
 
-            await _categoryRepository.SaveChanges();
+            await _categoryRepository.SaveChangesAsync();
 
             return Unit.Value;
         }

@@ -28,5 +28,19 @@ namespace CGRS.RestApi.Controllers
 
             return Ok();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateGameRequest request)
+        {
+            await _mediator.Send(new UpdateGameCommand(
+                    request.Id,
+                    request.Name,
+                    request.Description,
+                    request.IsActive,
+                    request.IsAdultOnly,
+                    request.CategoryId));
+
+            return Ok();
+        }
     }
 }

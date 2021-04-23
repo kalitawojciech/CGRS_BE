@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
-
-using CGRS.Domain.Exceptions;
+using CGRS.Application.Exceptions;
 
 using Microsoft.AspNetCore.Http;
 
@@ -61,7 +60,7 @@ namespace CGRS.RestApi
 
             var response = new
             {
-                errors = exception.Data["errors"],
+                error = exception.Data["error"],
                 status,
                 timeStamp = DateTime.Now,
                 message = exception.Source + " error",

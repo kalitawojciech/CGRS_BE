@@ -18,7 +18,7 @@ namespace CGRS.Application.Games.Commands
 
         public async Task<Unit> Handle(CreateGameCommand request, CancellationToken cancellationToken)
         {
-            await _gameRepository.Add(new Game()
+            await _gameRepository.AddAsync(new Game()
             {
                 Id = Guid.NewGuid(),
                 Name = request.Name,
