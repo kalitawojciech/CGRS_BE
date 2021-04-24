@@ -1,10 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CGRS.Domain.Entities;
 
 namespace CGRS.Domain.Interfaces
 {
     public interface IGameRepository
     {
-        Task Add(Game game);
+        Task AddAsync(Game game);
+
+        Task<Game> GetByIdAsync(Guid id);
+
+        Task SaveChangesAsync();
     }
 }

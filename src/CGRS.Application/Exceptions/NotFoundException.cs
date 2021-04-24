@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CGRS.Domain.Exceptions
+namespace CGRS.Application.Exceptions
 {
     public class NotFoundException : Exception
     {

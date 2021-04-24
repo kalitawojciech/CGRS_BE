@@ -18,7 +18,7 @@ namespace CGRS.Application.Categories.Commands
 
         public async Task<Unit> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
-            await _categoryRepository.Add(new Category()
+            await _categoryRepository.AddAsync(new Category()
             {
                 Id = Guid.NewGuid(),
                 Name = request.Name,
@@ -26,7 +26,7 @@ namespace CGRS.Application.Categories.Commands
                 IsActive = true,
             });
 
-            return new Unit();
+            return Unit.Value;
         }
     }
 }

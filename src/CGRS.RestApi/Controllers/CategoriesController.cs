@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CGRS.Application.Categories.Commands;
 using CGRS.Application.Categories.Queries;
-using CGRS.Domain.Interfaces;
 using CGRS.RestApi.RestModels.Categories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
