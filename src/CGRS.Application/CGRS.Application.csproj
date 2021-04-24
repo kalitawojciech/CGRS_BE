@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CGRS.Commons\CGRS.Commons.csproj" />
     <ProjectReference Include="..\CGRS.Domain\CGRS.Domain.csproj" />
   </ItemGroup>
 

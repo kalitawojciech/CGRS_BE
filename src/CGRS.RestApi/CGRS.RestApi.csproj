@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CGRS.Application\CGRS.Application.csproj" />
+    <ProjectReference Include="..\CGRS.Commons\CGRS.Commons.csproj" />
     <ProjectReference Include="..\CGRS.Domain\CGRS.Domain.csproj" />
     <ProjectReference Include="..\CGRS.Infrastructure\CGRS.Infrastructure.csproj" />
   </ItemGroup>
