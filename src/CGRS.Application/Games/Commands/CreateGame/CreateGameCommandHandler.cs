@@ -5,7 +5,7 @@ using CGRS.Domain.Entities;
 using CGRS.Domain.Interfaces;
 using MediatR;
 
-namespace CGRS.Application.Games.Commands
+namespace CGRS.Application.Games.Commands.CreateGame
 {
     public class CreateGameCommandHandler : IRequestHandler<CreateGameCommand>
     {

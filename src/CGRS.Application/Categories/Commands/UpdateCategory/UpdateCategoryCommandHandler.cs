@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using CGRS.Domain.Interfaces;
 using MediatR;
 
-namespace CGRS.Application.Categories.Commands
+namespace CGRS.Application.Categories.Commands.UpdateCategory
 {
     public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand>
     {

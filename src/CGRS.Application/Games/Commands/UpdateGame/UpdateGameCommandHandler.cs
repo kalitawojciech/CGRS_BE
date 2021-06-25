@@ -6,7 +6,7 @@ using CGRS.Domain.Interfaces;
 
 using MediatR;
 
-namespace CGRS.Application.Games.Commands
+namespace CGRS.Application.Games.Commands.UpdateGame
 {
     public class UpdateGameCommandHandler : IRequestHandler<UpdateGameCommand>
     {

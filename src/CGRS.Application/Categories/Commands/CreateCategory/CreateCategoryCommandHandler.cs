@@ -5,7 +5,7 @@ using CGRS.Domain.Entities;
 using CGRS.Domain.Interfaces;
 using MediatR;
 
-namespace CGRS.Application.Categories.Commands
+namespace CGRS.Application.Categories.Commands.CreateCategory
 {
     public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand>
     {

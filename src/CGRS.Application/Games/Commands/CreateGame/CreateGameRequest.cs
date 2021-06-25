@@ -1,16 +1,12 @@
 ﻿using System;
 
-namespace CGRS.RestApi.RestModels.Games
+namespace CGRS.Application.Games.Commands.CreateGame
 {
-    public class UpdateGameRequest
+    public class CreateGameRequest
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }
-
-        public bool IsActive { get; set; }
 
         public bool IsAdultOnly { get; set; }
 

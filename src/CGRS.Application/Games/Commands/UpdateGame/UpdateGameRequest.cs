@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CGRS.RestApi.RestModels.Categories
+namespace CGRS.Application.Games.Commands.UpdateGame
 {
-    public class UpdateCategoryRequest
+    public class UpdateGameRequest
     {
         public Guid Id { get; set; }
 
@@ -11,5 +11,9 @@ namespace CGRS.RestApi.RestModels.Categories
         public string Description { get; set; }
 
         public bool IsActive { get; set; }
+
+        public bool IsAdultOnly { get; set; }
+
+        public Guid CategoryId { get; set; }
     }
 }
