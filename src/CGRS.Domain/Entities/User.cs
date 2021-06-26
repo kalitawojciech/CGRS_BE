@@ -16,6 +16,8 @@ namespace CGRS.Domain.Entities
 
         public bool IsAdult { get; set; }
 
+        public string Role { get; set; }
+
         public virtual Identity Identity { get; set; }
     }
 }

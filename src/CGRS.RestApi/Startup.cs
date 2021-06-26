@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using AutoMapper;
 using CGRS.Application.Categories.Commands.CreateCategory;
 using CGRS.Commons.Helpers;
 using CGRS.Domain.Interfaces;
@@ -30,6 +31,7 @@ namespace CGRS.RestApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(opt => opt.AddPolicy("policy", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            ConfigureAutoMapper(services);
 
             services.AddMediatR(typeof(CreateCategoryCommand).Assembly);
             services.AddControllers();
@@ -136,6 +138,17 @@ namespace CGRS.RestApi
                     },
                 });
             });
+        }
+
+        private void ConfigureAutoMapper(IServiceCollection services)
+        {
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
     }
 }

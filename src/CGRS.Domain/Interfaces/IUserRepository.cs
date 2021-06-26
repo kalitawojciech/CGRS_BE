@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CGRS.Domain.Entities;
 
 namespace CGRS.Domain.Interfaces
@@ -12,5 +13,7 @@ namespace CGRS.Domain.Interfaces
         Task<User> GetByEmailForAuthenticationAsync(string email);
 
         Task<User> GetByNickAsync(string nick);
+
+        Task<List<User>> GetAllAsync();
     }
 }

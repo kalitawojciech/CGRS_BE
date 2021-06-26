@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CGRS.Application.Dtos.Users;
+using CGRS.Application.Exceptions;
 using CGRS.Commons.Helpers;
 using CGRS.Domain.Interfaces;
 using MediatR;
@@ -28,6 +29,16 @@ namespace CGRS.Application.Users.Commands
         {
             var userFromDb = await _userRepository.GetByEmailForAuthenticationAsync(request.Email);
 
+            if (userFromDb == null)
+            {
+                throw new BadRequestException("Invalid password or email!");
+            }
+
+            if (!PasswordHelper.VerifyPasswordHash(request.Password, userFromDb.Identity.PasswordHash, userFromDb.Identity.PasswordSalt))
+            {
+                throw new BadRequestException("Password or user mail is invalid");
+            }
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Value.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -35,7 +46,7 @@ namespace CGRS.Application.Users.Commands
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, userFromDb.Email.ToString()),
-                    new Claim(ClaimTypes.Role, userFromDb.Identity.Role),
+                    new Claim(ClaimTypes.Role, userFromDb.Role),
                 }),
                 Expires = DateTime.Now.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
@@ -48,7 +59,7 @@ namespace CGRS.Application.Users.Commands
             {
                 Id = userFromDb.Id,
                 Email = userFromDb.Email,
-                Role = userFromDb.Identity.Role,
+                Role = userFromDb.Role,
                 Token = tokenString,
             };
 

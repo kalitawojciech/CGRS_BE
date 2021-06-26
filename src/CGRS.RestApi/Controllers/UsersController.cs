@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CGRS.Application.Users.Commands;
+using CGRS.Application.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,15 +19,13 @@ namespace CGRS.RestApi.Controllers
             _mediator = mediator;
         }
 
-        #region Queries
-
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok();
-        }
+            var response = await _mediator.Send(new GetAllUsersQuery());
 
-        #endregion
+            return Ok(response);
+        }
 
         [HttpPost("register")]
         [AllowAnonymous]

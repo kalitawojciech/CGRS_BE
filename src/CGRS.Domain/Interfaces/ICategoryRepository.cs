@@ -16,5 +16,7 @@ namespace CGRS.Domain.Interfaces
         Task AddAsync(Category category);
 
         Task SaveChangesAsync();
+
+        Task<Category> GetByNameAsync(string name);
     }
 }

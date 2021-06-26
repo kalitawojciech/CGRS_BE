@@ -10,17 +10,31 @@ namespace CGRS.Infrastructure.Database
         {
         }
 
-        public DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
 
-        public DbSet<Game> Games { get; set; }
+        public virtual DbSet<Game> Games { get; set; }
+
+        public virtual DbSet<GamesTags> GamesTags { get; set; }
 
         public virtual DbSet<Identity> Identities { get; set; }
 
+        public virtual DbSet<Tag> Tags { get; set; }
+
         public virtual DbSet<User> Users { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseNpgsql("Host=localhost;Database=cgrs_db;Username=postgres;Password=admin");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Polish_Poland.1250");
+            modelBuilder.HasPostgresExtension("unaccent")
+                .HasAnnotation("Relational:Collation", "Polish_Poland.1250");
 
             modelBuilder.Entity<Category>(entity =>
             {
@@ -77,6 +91,31 @@ namespace CGRS.Infrastructure.Database
                     .HasConstraintName("games_category_id_fkey");
             });
 
+            modelBuilder.Entity<GamesTags>(entity =>
+            {
+                entity.ToTable("games_tags");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.GameId).HasColumnName("game_id");
+
+                entity.Property(e => e.TagId).HasColumnName("tag_id");
+
+                entity.HasOne(d => d.Game)
+                    .WithMany(p => p.GamesTags)
+                    .HasForeignKey(d => d.GameId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("games_tags_game_id_fkey");
+
+                entity.HasOne(d => d.Tag)
+                    .WithMany(p => p.GamesTags)
+                    .HasForeignKey(d => d.TagId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("games_tags_tag_id_fkey");
+            });
+
             modelBuilder.Entity<Identity>(entity =>
             {
                 entity.ToTable("identities");
@@ -92,11 +131,27 @@ namespace CGRS.Infrastructure.Database
                 entity.Property(e => e.PasswordSalt)
                     .IsRequired()
                     .HasColumnName("password_salt");
+            });
 
-                entity.Property(e => e.Role)
-                    .IsRequired()
+            modelBuilder.Entity<Tag>(entity =>
+            {
+                entity.ToTable("tags");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Description)
                     .HasColumnType("character varying")
-                    .HasColumnName("role");
+                    .HasColumnName("description");
+
+                entity.Property(e => e.IsActive)
+                    .HasColumnName("is_active")
+                    .HasDefaultValueSql("true");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(30)
+                    .HasColumnName("name");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -124,6 +179,11 @@ namespace CGRS.Infrastructure.Database
                     .IsRequired()
                     .HasMaxLength(30)
                     .HasColumnName("nick");
+
+                entity.Property(e => e.Role)
+                    .IsRequired()
+                    .HasColumnType("character varying")
+                    .HasColumnName("role");
 
                 entity.HasOne(d => d.Identity)
                     .WithOne(p => p.User)

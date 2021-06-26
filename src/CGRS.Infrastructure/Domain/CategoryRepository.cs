@@ -26,6 +26,7 @@ namespace CGRS.Infrastructure.Domain
         public async Task<Category> GetByIdAsync(Guid id)
         {
             return await _context.Categories
+                .Include(c => c.Games)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
         }
@@ -45,6 +46,13 @@ namespace CGRS.Infrastructure.Domain
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<Category> GetByNameAsync(string name)
+        {
+            return await _context.Categories
+                 .Where(c => c.Name == name)
+                 .FirstOrDefaultAsync();
         }
     }
 }

@@ -32,12 +32,12 @@ namespace CGRS.Application.Users.Commands
                 Email = request.Email,
                 IsAdult = true,
                 BirthDate = request.BirthDate,
+                Role = UserRole.User,
                 Identity = new Identity()
                 {
                     Id = Guid.NewGuid(),
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
-                    Role = UserRole.User,
                 },
             });
 
@@ -61,7 +61,7 @@ namespace CGRS.Application.Users.Commands
                 throw new BadRequestException("This email is already used!");
             }
 
-            if ((await _userRepository.GetByEmailAsync(request.Nick)) != null)
+            if ((await _userRepository.GetByNickAsync(request.Nick)) != null)
             {
                 throw new BadRequestException("This nick is already used!");
             }

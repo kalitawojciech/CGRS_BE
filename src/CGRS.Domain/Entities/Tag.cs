@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace CGRS.Domain.Entities
 {
-    public class Game
+    public class Tag
     {
-        public Game()
+        public Tag()
         {
             GamesTags = new HashSet<GamesTags>();
         }
@@ -17,14 +17,6 @@ namespace CGRS.Domain.Entities
         public string Description { get; set; }
 
         public bool? IsActive { get; set; }
-
-        public decimal? AverageScore { get; set; }
-
-        public bool? IsAdultOnly { get; set; }
-
-        public Guid CategoryId { get; set; }
-
-        public virtual Category Category { get; set; }
 
         public virtual ICollection<GamesTags> GamesTags { get; set; }
     }

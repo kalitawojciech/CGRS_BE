@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CGRS.Domain.Entities;
 using CGRS.Domain.Interfaces;
 using CGRS.Infrastructure.Database;
@@ -19,6 +20,11 @@ namespace CGRS.Infrastructure.Domain
         {
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<User>> GetAllAsync()
+        {
+            return await _context.Users.ToListAsync();
         }
 
         public async Task<User> GetByEmailAsync(string email)

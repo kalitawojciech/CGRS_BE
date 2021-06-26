@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using CGRS.Domain.Entities;
+using CGRS.Application.Dtos.Categories;
 using MediatR;
 
 namespace CGRS.Application.Categories.Queries
 {
-    public class GetAllCategoriesQuery : IRequest<List<Category>>
+    public class GetAllCategoriesQuery : IRequest<List<CategoryInfoResponse>>
     {
     }
 }
