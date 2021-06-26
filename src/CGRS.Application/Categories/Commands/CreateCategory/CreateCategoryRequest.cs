@@ -1,4 +1,4 @@
-﻿namespace CGRS.RestApi.RestModels.Categories
+﻿namespace CGRS.Application.Categories.Commands.CreateCategory
 {
     public class CreateCategoryRequest
     {

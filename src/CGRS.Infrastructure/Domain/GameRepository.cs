@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CGRS.Domain.Entities;
@@ -23,11 +24,35 @@ namespace CGRS.Infrastructure.Domain
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Game>> GetAllAsync()
+        {
+            return await _context.Games.Include(g => g.Category).ToListAsync();
+        }
+
         public async Task<Game> GetByIdAsync(Guid id)
         {
             return await _context.Games
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<Game> GetByNameAsync(string name)
+        {
+            return await _context.Games
+                .Where(c => c.Name == name)
+                .FirstOrDefaultAsync();
+        }
+
+        public void RemoveGame(Game gameToRemove)
+        {
+            _context.Remove(gameToRemove);
+            _context.SaveChanges();
+        }
+
+        public void RemoveGames(List<Game> gamesToRemove)
+        {
+            _context.RemoveRange(gamesToRemove);
+            _context.SaveChanges();
         }
 
         public async Task SaveChangesAsync()
