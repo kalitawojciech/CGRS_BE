@@ -25,7 +25,7 @@ namespace CGRS.Application.Categories.Commands.CreateCategory
             {
                 Id = Guid.NewGuid(),
                 Name = request.Name,
-                Description = request.Name,
+                Description = request.Description,
                 IsActive = true,
             });
 

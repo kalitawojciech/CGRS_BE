@@ -2,16 +2,18 @@
 
 namespace CGRS.Domain.Entities
 {
-    public class GamesTags
+    public partial class GamesMark
     {
         public Guid Id { get; set; }
 
+        public decimal AverageScore { get; set; }
+
         public Guid GameId { get; set; }
 
-        public Guid TagId { get; set; }
+        public Guid UserId { get; set; }
 
         public virtual Game Game { get; set; }
 
-        public virtual Tag Tag { get; set; }
+        public virtual User User { get; set; }
     }
 }

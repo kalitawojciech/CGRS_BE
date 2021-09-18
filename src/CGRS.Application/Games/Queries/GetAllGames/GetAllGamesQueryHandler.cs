@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -23,6 +25,24 @@ namespace CGRS.Application.Games.Queries.GetAllGames
         public async Task<List<GameInfoResponse>> Handle(GetAllGamesQuery request, CancellationToken cancellationToken)
         {
             List<Game> gamesFromDB = await _gameRepository.GetAllAsync();
+
+            if (request.GamesFilter.IsActive.Value == true)
+            {
+                gamesFromDB = gamesFromDB.Where(x => x.IsActive.Value).ToList();
+
+                foreach (var game in gamesFromDB)
+                {
+                    game.GamesMarks = game.GamesMarks.Where(x => x.UserId == Guid.Parse(request.User.Identity.Name)).ToList();
+                }
+            }
+
+            if (request.GamesFilter.IsActive == false)
+            {
+                foreach (var game in gamesFromDB)
+                {
+                    game.GamesMarks.Clear();
+                }
+            }
 
             var result = _mapper.Map<List<GameInfoResponse>>(gamesFromDB);
             return result;

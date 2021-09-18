@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace CGRS.Domain.Entities
 {
-    public class Game
+    public partial class Game
     {
         public Game()
         {
-            GamesTags = new HashSet<GamesTags>();
+            GamesMarks = new HashSet<GamesMark>();
         }
 
         public Guid Id { get; set; }
@@ -20,12 +20,12 @@ namespace CGRS.Domain.Entities
 
         public decimal? AverageScore { get; set; }
 
-        public bool? IsAdultOnly { get; set; }
+        public bool IsAdultOnly { get; set; }
 
         public Guid CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
 
-        public virtual ICollection<GamesTags> GamesTags { get; set; }
+        public virtual ICollection<GamesMark> GamesMarks { get; set; }
     }
 }

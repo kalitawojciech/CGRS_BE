@@ -2,7 +2,7 @@
 
 namespace CGRS.Domain.Entities
 {
-    public class Identity
+    public partial class Identity
     {
         public Guid Id { get; set; }
 
