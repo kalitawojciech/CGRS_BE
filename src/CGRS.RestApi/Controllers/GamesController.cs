@@ -8,6 +8,7 @@ using CGRS.Application.Games.Commands.UpdateGame;
 using CGRS.Application.Games.Queries.GetAllGames;
 using CGRS.Application.Games.Queries.GetAllGamesPopulated;
 using CGRS.Application.Games.Queries.GetGameById;
+using CGRS.Application.Games.Queries.Recommended;
 using CGRS.Commons.Enumerables;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -74,6 +75,14 @@ namespace CGRS.RestApi.Controllers
         public async Task<IActionResult> GetAllPopulated()
         {
             List<GamePopulatedResponse> response = await _mediator.Send(new GetAllGamesPopulatedQuery());
+
+            return Ok(response);
+        }
+
+        [HttpGet("recommended")]
+        public async Task<IActionResult> GetAllRecommended()
+        {
+            List<GameInfoResponse> response = await _mediator.Send(new GetRecommendedGamesQuery(User));
 
             return Ok(response);
         }
