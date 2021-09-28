@@ -7,6 +7,7 @@ namespace CGRS.Domain.Entities
     {
         public User()
         {
+            GameComments = new HashSet<GameComment>();
             GamesMarks = new HashSet<GamesMark>();
         }
 
@@ -25,6 +26,8 @@ namespace CGRS.Domain.Entities
         public string Role { get; set; }
 
         public virtual Identity Identity { get; set; }
+
+        public virtual ICollection<GameComment> GameComments { get; set; }
 
         public virtual ICollection<GamesMark> GamesMarks { get; set; }
     }

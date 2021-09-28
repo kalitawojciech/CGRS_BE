@@ -20,6 +20,8 @@ namespace CGRS.Infrastructure.Database
 
         public virtual DbSet<User> Users { get; set; }
 
+        public virtual DbSet<GameComment> GameComments { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -86,6 +88,35 @@ namespace CGRS.Infrastructure.Database
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("games_category_id_fkey");
+            });
+
+            modelBuilder.Entity<GameComment>(entity =>
+            {
+                entity.ToTable("game_comments");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.GameId).HasColumnName("game_id");
+
+                entity.Property(e => e.Message)
+                    .HasColumnType("character varying")
+                    .HasColumnName("message");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Game)
+                    .WithMany(p => p.GameComments)
+                    .HasForeignKey(d => d.GameId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("game_comments_game_id_fkey");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.GameComments)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("game_comments_user_id_fkey");
             });
 
             modelBuilder.Entity<GamesMark>(entity =>
@@ -171,5 +202,6 @@ namespace CGRS.Infrastructure.Database
                     .HasConstraintName("users_identity_id_fkey");
             });
         }
+
     }
 }

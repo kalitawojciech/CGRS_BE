@@ -8,6 +8,7 @@ using CGRS.Application.Games.Commands.UpdateGame;
 using CGRS.Application.Games.Queries.GetAllGames;
 using CGRS.Application.Games.Queries.GetAllGamesPopulated;
 using CGRS.Application.Games.Queries.GetGameById;
+using CGRS.Application.Games.Queries.GetGameByIdPopulated;
 using CGRS.Application.Games.Queries.Recommended;
 using CGRS.Commons.Enumerables;
 using MediatR;
@@ -59,6 +60,14 @@ namespace CGRS.RestApi.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             GameInfoResponse response = await _mediator.Send(new GetGameByIdQuery(id));
+
+            return Ok(response);
+        }
+
+        [HttpGet("{id}/populated")]
+        public async Task<IActionResult> GetByIdPopulated(Guid id)
+        {
+            GamePopulatedResponse response = await _mediator.Send(new GetGameByIdPopulatedQuery(id));
 
             return Ok(response);
         }

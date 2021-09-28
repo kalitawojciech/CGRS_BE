@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using AutoMapper;
 using CGRS.Application.Dtos.Categories;
+using CGRS.Application.Dtos.GameComments;
 using CGRS.Application.Dtos.Games;
 using CGRS.Application.Dtos.GamesMark;
 using CGRS.Application.Dtos.Users;
@@ -23,6 +24,8 @@ namespace CGRS.RestApi
             CreateMap<User, UserInfoResponse>();
 
             CreateMap<GamesMark, GamesMarkResponse>();
+
+            CreateMap<GameComment, GameCommentResponse>();
         }
     }
 }

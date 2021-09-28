@@ -41,6 +41,16 @@ namespace CGRS.Infrastructure.Domain
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<Game> GetByIdPopulatedAsync(Guid id)
+        {
+            return await _context.Games
+                .Include(g => g.Category)
+                .Include(g => g.GameComments)
+                .ThenInclude(c => c.User)
+                .Where(g => g.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<Game> GetByNameAsync(string name)
         {
             return await _context.Games
