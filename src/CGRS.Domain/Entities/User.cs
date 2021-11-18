@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CGRS.Domain.Entities
 {
-    public class User
+    public partial class User
     {
+        public User()
+        {
+            GameComments = new HashSet<GameComment>();
+            GamesMarks = new HashSet<GamesMark>();
+        }
+
         public Guid Id { get; set; }
 
         public Guid IdentityId { get; set; }
@@ -19,5 +26,9 @@ namespace CGRS.Domain.Entities
         public string Role { get; set; }
 
         public virtual Identity Identity { get; set; }
+
+        public virtual ICollection<GameComment> GameComments { get; set; }
+
+        public virtual ICollection<GamesMark> GamesMarks { get; set; }
     }
 }

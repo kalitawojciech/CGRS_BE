@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Data;
 using System.Threading.Tasks;
+using CGRS.Application.Categories.Commands.ChangeActivityStatus;
 using CGRS.Application.Categories.Commands.CreateCategory;
 using CGRS.Application.Categories.Commands.RemoveCategory;
 using CGRS.Application.Categories.Commands.UpdateCategory;
@@ -25,7 +25,7 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = UserRole.Admin + "," + UserRole.SuperAdmin)]
         public async Task<IActionResult> Create([FromBody] CreateCategoryRequest request)
         {
             await _mediator.Send(new CreateCategoryCommand(request));
@@ -46,13 +46,22 @@ namespace CGRS.RestApi.Controllers
         [Authorize]
         public async Task<IActionResult> GetById(Guid id)
         {
+            var result = await _mediator.Send(new GetCategoryByIdQuery(id));
+
+            return Ok(result);
+        }
+
+        [HttpGet("{id}/populated")]
+        [Authorize]
+        public async Task<IActionResult> GetByIdPopulated(Guid id)
+        {
             var result = await _mediator.Send(new GetCategoryByIdPopulatedQuery(id));
 
             return Ok(result);
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = UserRole.Admin + "," + UserRole.SuperAdmin)]
         public async Task<IActionResult> Edit([FromBody] UpdateCategoryRequest request)
         {
             await _mediator.Send(new UpdateCategoryCommand(request));
@@ -60,9 +69,17 @@ namespace CGRS.RestApi.Controllers
             return Ok();
         }
 
+        [HttpPut("change-status/{id}")]
+        [Authorize(Roles = UserRole.Admin + "," + UserRole.SuperAdmin)]
+        public async Task<IActionResult> ChangeActiveStatus(Guid id)
+        {
+            await _mediator.Send(new ChangeCategoryActiveStatusCommand(id));
+
+            return Ok();
+        }
+
         [HttpDelete("{id}")]
-        [Authorize(Roles = UserRole.Admin)]
-        //[Authorize(Roles = UserRole.SuperAdmin)]
+        [Authorize(Roles = UserRole.Admin + "," + UserRole.SuperAdmin)]
         public async Task<IActionResult> Delete(Guid id)
         {
             await _mediator.Send(new RemoveCategoryCommand(id));

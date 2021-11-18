@@ -1,4 +1,5 @@
 ﻿using System;
+using CGRS.Application.Dtos.GamesMark;
 
 namespace CGRS.Application.Dtos.Games
 {
@@ -16,6 +17,10 @@ namespace CGRS.Application.Dtos.Games
 
         public bool? IsAdultOnly { get; set; }
 
+        public Guid CategoryId { get; set; }
+
         public string CategoryName { get; set; }
+
+        public GamesMarkResponse GameMarkResponse { get; set; }
     }
 }

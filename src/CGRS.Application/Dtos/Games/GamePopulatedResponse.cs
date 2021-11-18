@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using CGRS.Application.Dtos.Categories;
+using CGRS.Application.Dtos.GameComments;
 
 namespace CGRS.Application.Dtos.Games
 {
@@ -18,5 +20,7 @@ namespace CGRS.Application.Dtos.Games
         public bool? IsAdultOnly { get; set; }
 
         public CategoryInfoResponse Category { get; set; }
+
+        public List<GameCommentResponse> GameComments { get; set; }
     }
 }

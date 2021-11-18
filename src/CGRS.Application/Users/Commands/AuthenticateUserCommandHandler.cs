@@ -45,10 +45,10 @@ namespace CGRS.Application.Users.Commands
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, userFromDb.Email.ToString()),
+                    new Claim(ClaimTypes.Name, userFromDb.Id.ToString()),
                     new Claim(ClaimTypes.Role, userFromDb.Role),
                 }),
-                Expires = DateTime.Now.AddHours(1),
+                Expires = DateTime.Now.AddHours(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             };
 

@@ -26,13 +26,28 @@ namespace CGRS.Infrastructure.Domain
 
         public async Task<List<Game>> GetAllAsync()
         {
-            return await _context.Games.Include(g => g.Category).ToListAsync();
+            return await _context.Games
+                .Include(g => g.Category)
+                .Include(g => g.GamesMarks)
+                .OrderByDescending(g => g.IsActive)
+                .ThenBy(g => g.Name)
+                .ToListAsync();
         }
 
         public async Task<Game> GetByIdAsync(Guid id)
         {
             return await _context.Games
                 .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Game> GetByIdPopulatedAsync(Guid id)
+        {
+            return await _context.Games
+                .Include(g => g.Category)
+                .Include(g => g.GameComments)
+                .ThenInclude(c => c.User)
+                .Where(g => g.Id == id)
                 .FirstOrDefaultAsync();
         }
 
