@@ -14,11 +14,11 @@ namespace CGRS.RestApi.Controllers
     [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class GameCommentController : ControllerBase
+    public class GamesCommentsController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public GameCommentController(IMediator mediator)
+        public GamesCommentsController(IMediator mediator)
         {
             _mediator = mediator;
         }
