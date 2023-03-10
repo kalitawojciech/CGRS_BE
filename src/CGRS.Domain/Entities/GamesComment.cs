@@ -1,8 +1,10 @@
 ﻿using System;
 
+#nullable disable
+
 namespace CGRS.Domain.Entities
 {
-    public class GameComment
+    public partial class GamesComment
     {
         public Guid Id { get; set; }
 

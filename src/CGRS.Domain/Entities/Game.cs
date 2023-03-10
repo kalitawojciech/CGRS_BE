@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace CGRS.Domain.Entities
 {
     public partial class Game
     {
         public Game()
         {
-            GameComments = new HashSet<GameComment>();
+            GamesComments = new HashSet<GamesComment>();
             GamesMarks = new HashSet<GamesMark>();
         }
 
@@ -27,7 +29,7 @@ namespace CGRS.Domain.Entities
 
         public virtual Category Category { get; set; }
 
-        public virtual ICollection<GameComment> GameComments { get; set; }
+        public virtual ICollection<GamesComment> GamesComments { get; set; }
 
         public virtual ICollection<GamesMark> GamesMarks { get; set; }
     }

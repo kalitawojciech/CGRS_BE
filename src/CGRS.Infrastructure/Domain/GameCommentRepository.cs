@@ -18,26 +18,26 @@ namespace CGRS.Infrastructure.Domain
             _context = context;
         }
 
-        public async Task AddAsync(GameComment gameComment)
+        public async Task AddAsync(GamesComment gameComment)
         {
-            await _context.GameComments.AddAsync(gameComment);
+            await _context.GamesComments.AddAsync(gameComment);
             await _context.SaveChangesAsync();
         }
 
-        public void Delete(GameComment gameComment)
+        public void Delete(GamesComment gameComment)
         {
-            _context.GameComments.Remove(gameComment);
+            _context.GamesComments.Remove(gameComment);
             _context.SaveChanges();
         }
 
-        public async Task<List<GameComment>> GetByGameIdAsync(Guid gameId)
+        public async Task<List<GamesComment>> GetByGameIdAsync(Guid gameId)
         {
-            return await _context.GameComments.Where(gm => gm.GameId == gameId).ToListAsync();
+            return await _context.GamesComments.Where(gm => gm.GameId == gameId).ToListAsync();
         }
 
-        public async Task<GameComment> GetByIdAsync(Guid id)
+        public async Task<GamesComment> GetByIdAsync(Guid id)
         {
-            return await _context.GameComments.Where(gm => gm.Id == id).FirstOrDefaultAsync();
+            return await _context.GamesComments.Where(gm => gm.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task SaveChangesAsync()

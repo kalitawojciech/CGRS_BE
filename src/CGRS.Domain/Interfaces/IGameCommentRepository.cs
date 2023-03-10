@@ -7,14 +7,14 @@ namespace CGRS.Domain.Interfaces
 {
     public interface IGameCommentRepository
     {
-        public Task AddAsync(GameComment gameComment);
+        public Task AddAsync(GamesComment gameComment);
 
         public Task SaveChangesAsync();
 
-        public Task<GameComment> GetByIdAsync(Guid id);
+        public Task<GamesComment> GetByIdAsync(Guid id);
 
-        public Task<List<GameComment>> GetByGameIdAsync(Guid gameId);
+        public Task<List<GamesComment>> GetByGameIdAsync(Guid gameId);
 
-        void Delete(GameComment gameComment);
+        void Delete(GamesComment gameComment);
     }
 }

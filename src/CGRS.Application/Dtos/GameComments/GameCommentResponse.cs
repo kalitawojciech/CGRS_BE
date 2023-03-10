@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using CGRS.Application.Dtos.Users;
 
 namespace CGRS.Application.Dtos.GameComments

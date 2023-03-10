@@ -45,7 +45,7 @@ namespace CGRS.Infrastructure.Domain
         {
             return await _context.Games
                 .Include(g => g.Category)
-                .Include(g => g.GameComments)
+                .Include(g => g.GamesComments)
                 .ThenInclude(c => c.User)
                 .Where(g => g.Id == id)
                 .FirstOrDefaultAsync();

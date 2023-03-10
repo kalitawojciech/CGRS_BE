@@ -5,6 +5,6 @@ namespace CGRS.Domain.Interfaces
 {
     public interface IIdentityRepository
     {
-        Task AddAsync(Identity identity);
+        Task AddAsync(UsersIdentity identity);
     }
 }

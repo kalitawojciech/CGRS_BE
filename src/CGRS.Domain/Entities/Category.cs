@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace CGRS.Domain.Entities
 {
     public partial class Category

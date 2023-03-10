@@ -14,18 +14,23 @@ namespace CGRS.Infrastructure.Database
 
         public virtual DbSet<Game> Games { get; set; }
 
+        public virtual DbSet<GamesComment> GamesComments { get; set; }
+
         public virtual DbSet<GamesMark> GamesMarks { get; set; }
 
-        public virtual DbSet<Identity> Identities { get; set; }
+        public virtual DbSet<GamesTag> GamesTags { get; set; }
+
+        public virtual DbSet<Tag> Tags { get; set; }
 
         public virtual DbSet<User> Users { get; set; }
 
-        public virtual DbSet<GameComment> GameComments { get; set; }
+        public virtual DbSet<UsersIdentity> UsersIdentities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseNpgsql("Host=localhost;Database=cgrs_db;Username=postgres;Password=admin");
             }
         }
@@ -90,9 +95,9 @@ namespace CGRS.Infrastructure.Database
                     .HasConstraintName("games_category_id_fkey");
             });
 
-            modelBuilder.Entity<GameComment>(entity =>
+            modelBuilder.Entity<GamesComment>(entity =>
             {
-                entity.ToTable("game_comments");
+                entity.ToTable("games_comments");
 
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
@@ -107,16 +112,16 @@ namespace CGRS.Infrastructure.Database
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.HasOne(d => d.Game)
-                    .WithMany(p => p.GameComments)
+                    .WithMany(p => p.GamesComments)
                     .HasForeignKey(d => d.GameId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("game_comments_game_id_fkey");
+                    .HasConstraintName("games_comments_game_id_fkey");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.GameComments)
+                    .WithMany(p => p.GamesComments)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("game_comments_user_id_fkey");
+                    .HasConstraintName("games_comments_user_id_fkey");
             });
 
             modelBuilder.Entity<GamesMark>(entity =>
@@ -127,10 +132,10 @@ namespace CGRS.Infrastructure.Database
                     .ValueGeneratedNever()
                     .HasColumnName("id");
 
-                entity.Property(e => e.AverageScore)
-                    .HasColumnName("average_score");
-
                 entity.Property(e => e.GameId).HasColumnName("game_id");
+
+                entity.Property(e => e.Score)
+                    .HasColumnName("score");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -147,21 +152,44 @@ namespace CGRS.Infrastructure.Database
                     .HasConstraintName("games_marks_user_id_fkey");
             });
 
-            modelBuilder.Entity<Identity>(entity =>
+            modelBuilder.Entity<GamesTag>(entity =>
             {
-                entity.ToTable("identities");
+                entity.HasNoKey();
+
+                entity.ToTable("games_tags");
+
+                entity.Property(e => e.GameId).HasColumnName("game_id");
+
+                entity.Property(e => e.TagId).HasColumnName("tag_id");
+
+                entity.HasOne(d => d.Game)
+                    .WithMany()
+                    .HasForeignKey(d => d.GameId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("games_tags_game_id_fkey");
+
+                entity.HasOne(d => d.Tag)
+                    .WithMany()
+                    .HasForeignKey(d => d.TagId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("games_tags_tag_id_fkey");
+            });
+
+            modelBuilder.Entity<Tag>(entity =>
+            {
+                entity.ToTable("tags");
 
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
                     .HasColumnName("id");
 
-                entity.Property(e => e.PasswordHash)
-                    .IsRequired()
-                    .HasColumnName("password_hash");
+                entity.Property(e => e.IsActive)
+                    .HasColumnName("is_active")
+                    .HasDefaultValueSql("true");
 
-                entity.Property(e => e.PasswordSalt)
-                    .IsRequired()
-                    .HasColumnName("password_salt");
+                entity.Property(e => e.Name)
+                    .HasMaxLength(30)
+                    .HasColumnName("name");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -201,7 +229,23 @@ namespace CGRS.Infrastructure.Database
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("users_identity_id_fkey");
             });
-        }
 
+            modelBuilder.Entity<UsersIdentity>(entity =>
+            {
+                entity.ToTable("users_identities");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.PasswordHash)
+                    .IsRequired()
+                    .HasColumnName("password_hash");
+
+                entity.Property(e => e.PasswordSalt)
+                    .IsRequired()
+                    .HasColumnName("password_salt");
+            });
+        }
     }
 }

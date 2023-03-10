@@ -26,7 +26,7 @@ namespace CGRS.Application.GamesMarks.Commands.CrateGameMark
                 Id = Guid.NewGuid(),
                 GameId = request.CrateGameMarkRequest.GameId,
                 UserId = Guid.Parse(request.User.Identity.Name),
-                AverageScore = request.CrateGameMarkRequest.AverageScore,
+                Score = request.CrateGameMarkRequest.AverageScore,
             };
 
             await _gameMarkRepository.AddAsync(gameMarkToAdd);
@@ -34,7 +34,7 @@ namespace CGRS.Application.GamesMarks.Commands.CrateGameMark
             var gameMarksForGame = await _gameMarkRepository.GetByGameIdAsync(request.CrateGameMarkRequest.GameId);
             var gameFromDb = await _gameRepository.GetByIdAsync(request.CrateGameMarkRequest.GameId);
 
-            gameFromDb.AverageScore = decimal.Round(gameMarksForGame.Sum(gm => gm.AverageScore) / gameMarksForGame.Count, 2);
+            gameFromDb.AverageScore = decimal.Round(gameMarksForGame.Sum(gm => gm.Score).Value / gameMarksForGame.Count, 2);
 
             await _gameRepository.SaveChangesAsync();
 

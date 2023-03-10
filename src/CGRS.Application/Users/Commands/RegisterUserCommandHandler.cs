@@ -33,7 +33,7 @@ namespace CGRS.Application.Users.Commands
                 IsAdult = true,
                 BirthDate = request.BirthDate,
                 Role = UserRole.User,
-                Identity = new Identity()
+                Identity = new UsersIdentity()
                 {
                     Id = Guid.NewGuid(),
                     PasswordHash = passwordHash,

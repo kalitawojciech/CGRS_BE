@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using CGRS.Domain.Entities;
@@ -20,7 +18,7 @@ namespace CGRS.Application.GameComments.Commands.CreateGameComment
 
         public async Task<Unit> Handle(CreateGameCommentCommand request, CancellationToken cancellationToken)
         {
-            GameComment gameCommentToAdd = new GameComment()
+            GamesComment gameCommentToAdd = new GamesComment()
             {
                 Id = Guid.NewGuid(),
                 GameId = request.CreateGameCommentRequest.GameId,

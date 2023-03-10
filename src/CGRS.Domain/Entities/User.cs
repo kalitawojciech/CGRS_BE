@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#nullable disable
+
 namespace CGRS.Domain.Entities
 {
     public partial class User
     {
         public User()
         {
-            GameComments = new HashSet<GameComment>();
+            GamesComments = new HashSet<GamesComment>();
             GamesMarks = new HashSet<GamesMark>();
         }
 
@@ -25,9 +27,9 @@ namespace CGRS.Domain.Entities
 
         public string Role { get; set; }
 
-        public virtual Identity Identity { get; set; }
+        public virtual UsersIdentity Identity { get; set; }
 
-        public virtual ICollection<GameComment> GameComments { get; set; }
+        public virtual ICollection<GamesComment> GamesComments { get; set; }
 
         public virtual ICollection<GamesMark> GamesMarks { get; set; }
     }

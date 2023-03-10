@@ -27,13 +27,13 @@ namespace CGRS.Application.GamesMarks.Commands.UpdateGameMark
                 throw new BadRequestException("Invalid game mark id");
             }
 
-            gameMarkFromDb.AverageScore = request.UpdateGameMarkRequest.AverageScore;
+            gameMarkFromDb.Score = request.UpdateGameMarkRequest.AverageScore;
             await _gameMarkRepository.SaveChangesAsync();
 
             var gameMarksForGame = await _gameMarkRepository.GetByGameIdAsync(request.UpdateGameMarkRequest.GameId);
             var gameFromDb = await _gameRepository.GetByIdAsync(request.UpdateGameMarkRequest.GameId);
 
-            gameFromDb.AverageScore = decimal.Round(gameMarksForGame.Sum(gm => gm.AverageScore) / gameMarksForGame.Count, 2);
+            gameFromDb.AverageScore = decimal.Round(gameMarksForGame.Sum(gm => gm.Score).Value / gameMarksForGame.Count, 2);
 
             await _gameRepository.SaveChangesAsync();
 

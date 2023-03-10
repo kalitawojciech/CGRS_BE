@@ -14,9 +14,9 @@ namespace CGRS.Infrastructure.Domain
             _context = context;
         }
 
-        public async Task AddAsync(Identity identity)
+        public async Task AddAsync(UsersIdentity identity)
         {
-            await _context.Identities.AddAsync(identity);
+            await _context.UsersIdentities.AddAsync(identity);
             await _context.SaveChangesAsync();
         }
     }

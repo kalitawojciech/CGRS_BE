@@ -1,8 +1,10 @@
 ﻿using System;
 
+#nullable disable
+
 namespace CGRS.Domain.Entities
 {
-    public partial class Identity
+    public partial class UsersIdentity
     {
         public Guid Id { get; set; }
 

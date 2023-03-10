@@ -1,12 +1,14 @@
 ﻿using System;
 
+#nullable disable
+
 namespace CGRS.Domain.Entities
 {
     public partial class GamesMark
     {
         public Guid Id { get; set; }
 
-        public decimal AverageScore { get; set; }
+        public decimal? Score { get; set; }
 
         public Guid GameId { get; set; }
 
