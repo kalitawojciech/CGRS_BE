@@ -42,6 +42,7 @@ namespace CGRS.RestApi
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IGameMarkRepository, GameMarkRepository>();
             services.AddTransient<IGameCommentRepository, GameCommentRepository>();
+            services.AddTransient<ITagRepository, TagRepository>();
 
             var x = Configuration.GetConnectionString("ConnectionString");
 
