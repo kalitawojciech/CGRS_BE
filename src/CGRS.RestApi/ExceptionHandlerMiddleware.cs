@@ -58,15 +58,15 @@ namespace CGRS.RestApi
                     return context.Response.WriteAsync(exception.Message);
             }
 
-            var response = new
-            {
-                error = exception.Data["error"],
-                status,
-                timeStamp = DateTime.Now,
-                message = exception.Source + " error",
-            };
+            //var response = new
+            //{
+            //    error = exception.Data["error"],
+            //    status,
+            //    timeStamp = DateTime.Now,
+            //    //message = exception.Source + " error",
+            //};
 
-            payload = JsonConvert.SerializeObject(response);
+            payload = JsonConvert.SerializeObject(exception.Data["error"]);
             context.Response.StatusCode = (int)statusCode;
             context.Response.ContentType = "application/json";
 

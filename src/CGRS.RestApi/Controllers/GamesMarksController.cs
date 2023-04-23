@@ -20,6 +20,8 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> Add([FromBody] CrateGameMarkRequest request)
         {
             await _mediator.Send(new CrateGameMarkCommand(request, User));
@@ -28,6 +30,8 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> Edit([FromBody] UpdateGameMarkRequest request)
         {
             await _mediator.Send(new UpdateGameMarkCommand(request, User));

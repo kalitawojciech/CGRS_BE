@@ -64,7 +64,10 @@ namespace CGRS.RestApi
             }
 
             app.UseCors("policy");
-            app.UseSwagger();
+            app.UseSwagger(options =>
+            {
+                options.SerializeAsV2 = true;
+            });
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "CGRS Rest API");

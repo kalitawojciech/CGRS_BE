@@ -31,6 +31,8 @@ namespace CGRS.RestApi.Controllers
 
         [HttpPost]
         [Authorize(Roles = UserRole.Admin + "," + UserRole.SuperAdmin)]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> Create([FromBody] CreateGameRequest request)
         {
             await _mediator.Send(new CreateGameCommand(request));
@@ -40,6 +42,8 @@ namespace CGRS.RestApi.Controllers
 
         [HttpPut]
         [Authorize(Roles = UserRole.Admin + "," + UserRole.SuperAdmin)]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> Update([FromBody] UpdateGameRequest request)
         {
             await _mediator.Send(new UpdateGameCommand(request));
@@ -49,6 +53,8 @@ namespace CGRS.RestApi.Controllers
 
         [HttpPut("change-status/{id}")]
         [Authorize(Roles = UserRole.Admin + "," + UserRole.SuperAdmin)]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> ChangeActiveStatus(Guid id)
         {
             await _mediator.Send(new ChangeGameActiveStatusCommand(id));
@@ -57,6 +63,8 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(GameInfoResponse), 200)]
+        //[ProducesResponseType(typeof(Unit), 404)]
         public async Task<IActionResult> GetById(Guid id)
         {
             GameInfoResponse response = await _mediator.Send(new GetGameByIdQuery(id));
@@ -65,6 +73,8 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpGet("{id}/populated")]
+        [ProducesResponseType(typeof(GamePopulatedResponse), 200)]
+        //[ProducesResponseType(typeof(Unit), 404)]
         public async Task<IActionResult> GetByIdPopulated(Guid id)
         {
             GamePopulatedResponse response = await _mediator.Send(new GetGameByIdPopulatedQuery(id));
@@ -73,6 +83,7 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(List<GameInfoResponse>), 200)]
         public async Task<IActionResult> GetAll([FromQuery] GamesFilter gamesFilter)
         {
             List<GameInfoResponse> response = await _mediator.Send(new GetAllGamesQuery(gamesFilter, User));
@@ -81,6 +92,7 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpGet("populated")]
+        [ProducesResponseType(typeof(List<GamePopulatedResponse>), 200)]
         public async Task<IActionResult> GetAllPopulated()
         {
             List<GamePopulatedResponse> response = await _mediator.Send(new GetAllGamesPopulatedQuery());
@@ -89,6 +101,7 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpGet("recommended")]
+        [ProducesResponseType(typeof(List<GameInfoResponse>), 200)]
         public async Task<IActionResult> GetAllRecommended()
         {
             List<GameInfoResponse> response = await _mediator.Send(new GetRecommendedGamesQuery(User));

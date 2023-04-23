@@ -22,6 +22,8 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> Add([FromBody] CreateGameCommentRequest request)
         {
             await _mediator.Send(new CreateGameCommentCommand(request, User));
@@ -30,6 +32,8 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> Edit([FromBody] UpdateGameCommentRequest request)
         {
             await _mediator.Send(new UpdateGameCommentCommand(request, User));
@@ -38,6 +42,8 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> Delete(Guid id)
         {
             await _mediator.Send(new DeleteGameCommentCommand(id));

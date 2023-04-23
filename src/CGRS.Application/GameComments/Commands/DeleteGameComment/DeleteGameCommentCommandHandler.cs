@@ -21,7 +21,7 @@ namespace CGRS.Application.GameComments.Commands.DeleteGameComment
 
             if (gameCommentFromDb == null)
             {
-                throw new BadRequestException("Invalid game mark id");
+                throw new BadRequestException("Game comment does not exist");
             }
 
             _gameCommentRepository.Delete(gameCommentFromDb);

@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using CGRS.Application.Dtos.Users;
 using CGRS.Application.Users.Commands;
 using CGRS.Application.Users.Queries;
 using MediatR;
@@ -20,6 +23,7 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(List<UserInfoResponse>), 200)]
         public async Task<IActionResult> GetAll()
         {
             var response = await _mediator.Send(new GetAllUsersQuery());
@@ -29,6 +33,8 @@ namespace CGRS.RestApi.Controllers
 
         [HttpPost("register")]
         [AllowAnonymous]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> Register([FromBody] RegisterUserRequest request)
         {
             await _mediator.Send(new RegisterUserCommand(request));
@@ -37,6 +43,8 @@ namespace CGRS.RestApi.Controllers
 
         [HttpPost("authenticate")]
         [AllowAnonymous]
+        [ProducesResponseType(typeof(LoggedInUserResponse), 200)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> Authenticate([FromBody] UserAuthenticationRequest request)
         {
             var response = await _mediator.Send(new AuthenticateUserCommand(request));

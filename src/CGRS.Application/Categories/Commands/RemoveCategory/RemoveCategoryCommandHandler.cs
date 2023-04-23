@@ -25,7 +25,7 @@ namespace CGRS.Application.Categories.Commands.RemoveCategory
 
             if (categoryToRemove == null)
             {
-                throw new BadRequestException("This group does not exist!");
+                throw new BadRequestException("This category does not exist!");
             }
 
             if (categoryToRemove.Games.Count > 0)

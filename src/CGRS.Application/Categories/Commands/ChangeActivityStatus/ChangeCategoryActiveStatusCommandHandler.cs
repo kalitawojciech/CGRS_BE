@@ -22,7 +22,7 @@ namespace CGRS.Application.Categories.Commands.ChangeActivityStatus
 
             if (categoryFromDb == null)
             {
-                throw new BadRequestException("Given game does not exist");
+                throw new BadRequestException("Given category does not exist");
             }
 
             categoryFromDb.IsActive = !categoryFromDb.IsActive;

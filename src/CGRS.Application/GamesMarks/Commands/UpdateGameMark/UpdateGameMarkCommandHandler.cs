@@ -24,7 +24,7 @@ namespace CGRS.Application.GamesMarks.Commands.UpdateGameMark
 
             if (gameMarkFromDb == null)
             {
-                throw new BadRequestException("Invalid game mark id");
+                throw new BadRequestException("Game mark does not exist");
             }
 
             gameMarkFromDb.Score = request.UpdateGameMarkRequest.AverageScore;
