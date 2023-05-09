@@ -74,7 +74,7 @@ namespace CGRS.RestApi.Controllers
 
         [HttpGet("{id}/populated")]
         [ProducesResponseType(typeof(GamePopulatedResponse), 200)]
-        //[ProducesResponseType(typeof(Unit), 404)]
+        [ProducesResponseType(typeof(Unit), 404)]
         public async Task<IActionResult> GetByIdPopulated(Guid id)
         {
             GamePopulatedResponse response = await _mediator.Send(new GetGameByIdPopulatedQuery(id));

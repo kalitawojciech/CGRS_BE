@@ -33,7 +33,6 @@ namespace CGRS.Application.Games.Commands.UpdateGame
 
             gameFromDb.Name = request.Name;
             gameFromDb.Description = request.Description;
-            gameFromDb.IsActive = request.IsActive;
             gameFromDb.IsAdultOnly = request.IsAdultOnly;
             gameFromDb.CategoryId = request.CategoryId;
 

@@ -11,14 +11,12 @@ namespace CGRS.Application.Categories.Commands.UpdateCategory
 
         public string Description { get; set; }
 
-        public bool IsActive { get; set; }
 
         public UpdateCategoryCommand(UpdateCategoryRequest updateCategoryRequest)
         {
             Id = updateCategoryRequest.Id;
             Name = updateCategoryRequest.Name;
             Description = updateCategoryRequest.Description;
-            IsActive = updateCategoryRequest.IsActive;
         }
     }
 }

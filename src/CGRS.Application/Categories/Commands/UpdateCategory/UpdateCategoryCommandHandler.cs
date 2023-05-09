@@ -29,7 +29,6 @@ namespace CGRS.Application.Categories.Commands.UpdateCategory
 
             categoryFromDb.Name = request.Name;
             categoryFromDb.Description = request.Description;
-            categoryFromDb.IsActive = request.IsActive;
 
             await _categoryRepository.SaveChangesAsync();
 

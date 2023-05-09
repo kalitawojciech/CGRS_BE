@@ -11,8 +11,6 @@ namespace CGRS.Application.Games.Commands.UpdateGame
 
         public string Description { get; set; }
 
-        public bool IsActive { get; set; }
-
         public bool IsAdultOnly { get; set; }
 
         public Guid CategoryId { get; set; }
@@ -22,7 +20,6 @@ namespace CGRS.Application.Games.Commands.UpdateGame
             Id = updateGameRequest.Id;
             Name = updateGameRequest.Name;
             Description = updateGameRequest.Description;
-            IsActive = updateGameRequest.IsActive;
             IsAdultOnly = updateGameRequest.IsAdultOnly;
             CategoryId = updateGameRequest.CategoryId;
         }
