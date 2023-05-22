@@ -22,5 +22,7 @@ namespace CGRS.Domain.Interfaces
         void RemoveGames(List<Game> gamesToRemove);
 
         Task<Game> GetByIdPopulatedAsync(Guid id);
+
+        Task<List<Game>> GetByNameFilteredAsync(string name);
     }
 }

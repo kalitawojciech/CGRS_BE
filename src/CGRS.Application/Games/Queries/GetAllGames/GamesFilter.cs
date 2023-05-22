@@ -6,6 +6,6 @@ namespace CGRS.Application.Games.Queries.GetAllGames
     {
         public bool? IsActive { get; set; }
 
-        public Guid? CategoryId { get; set; }
+        public string CategoryId { get; set; }
     }
 }

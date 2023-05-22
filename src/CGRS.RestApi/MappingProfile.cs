@@ -17,6 +17,7 @@ namespace CGRS.RestApi
                 .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
                 .ForMember(dest => dest.GameMarkResponse, opt => opt.MapFrom(src => src.GamesMarks.FirstOrDefault()));
             CreateMap<Game, GamePopulatedResponse>();
+            CreateMap<Game, GameNameResponse>();
 
             CreateMap<Category, CategoryInfoResponse>();
             CreateMap<Category, CategoryPopulatedResponse>();

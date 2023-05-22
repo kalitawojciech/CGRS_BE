@@ -37,6 +37,7 @@ namespace CGRS.Infrastructure.Domain
         public async Task<Game> GetByIdAsync(Guid id)
         {
             return await _context.Games
+                .Include(g => g.Category)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
         }
@@ -56,6 +57,13 @@ namespace CGRS.Infrastructure.Domain
             return await _context.Games
                 .Where(c => c.Name == name)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Game>> GetByNameFilteredAsync(string name)
+        {
+            return await _context.Games
+                .Where(c => c.Name.ToLower().Contains(name.ToLower()))
+                .ToListAsync();
         }
 
         public void RemoveGame(Game gameToRemove)

@@ -9,6 +9,7 @@ using CGRS.Application.Games.Queries.GetAllGames;
 using CGRS.Application.Games.Queries.GetAllGamesPopulated;
 using CGRS.Application.Games.Queries.GetGameById;
 using CGRS.Application.Games.Queries.GetGameByIdPopulated;
+using CGRS.Application.Games.Queries.GetNamesFiltered;
 using CGRS.Application.Games.Queries.Recommended;
 using CGRS.Commons.Enumerables;
 using MediatR;
@@ -63,6 +64,7 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(GameInfoResponse), 200)]
         //[ProducesResponseType(typeof(Unit), 404)]
         public async Task<IActionResult> GetById(Guid id)
@@ -73,6 +75,7 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpGet("{id}/populated")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(GamePopulatedResponse), 200)]
         [ProducesResponseType(typeof(Unit), 404)]
         public async Task<IActionResult> GetByIdPopulated(Guid id)
@@ -87,6 +90,16 @@ namespace CGRS.RestApi.Controllers
         public async Task<IActionResult> GetAll([FromQuery] GamesFilter gamesFilter)
         {
             List<GameInfoResponse> response = await _mediator.Send(new GetAllGamesQuery(gamesFilter, User));
+
+            return Ok(response);
+        }
+
+        [HttpGet("get-names")]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(List<GameNameResponse>), 200)]
+        public async Task<IActionResult> GetNamesFiltered([FromQuery] string name)
+        {
+            List<GameNameResponse> response = await _mediator.Send(new GetNamesFilteredQuery(name));
 
             return Ok(response);
         }
