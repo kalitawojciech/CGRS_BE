@@ -13,6 +13,8 @@ namespace CGRS.Domain.Interfaces
 
         public Task<GamesMark> GetByIdAsync(Guid id);
 
+        public Task<GamesMark> GetByGameAndUserAsync(Guid gameId, Guid userId);
+
         public Task<List<GamesMark>> GetByGameIdAsync(Guid gameId);
     }
 }

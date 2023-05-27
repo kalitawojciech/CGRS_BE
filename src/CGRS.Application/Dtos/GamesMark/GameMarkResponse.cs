@@ -2,7 +2,7 @@
 
 namespace CGRS.Application.Dtos.GamesMark
 {
-    public class GamesMarkResponse
+    public class GameMarkResponse
     {
         public Guid Id { get; set; }
 

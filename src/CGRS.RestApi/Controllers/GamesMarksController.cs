@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using CGRS.Application.Dtos.GamesMark;
 using CGRS.Application.GamesMarks.Commands.CrateGameMark;
 using CGRS.Application.GamesMarks.Commands.UpdateGameMark;
+using CGRS.Application.GamesMarks.Queries.GetGameMarkForCurrentUserByGameId;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +38,15 @@ namespace CGRS.RestApi.Controllers
         public async Task<IActionResult> Edit([FromBody] UpdateGameMarkRequest request)
         {
             await _mediator.Send(new UpdateGameMarkCommand(request, User));
+
+            return Ok();
+        }
+
+        [HttpGet("{gameId}")]
+        [ProducesResponseType(typeof(GameMarkResponse), 200)]
+        public async Task<IActionResult> GetForCurrentUserByGameId([FromRoute] Guid gameId)
+        {
+            await _mediator.Send(new GetGameMarkForCurrentUserByGameIdQuery(gameId, User));
 
             return Ok();
         }

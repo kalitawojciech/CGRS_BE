@@ -7,7 +7,6 @@ using CGRS.Domain.Entities;
 using CGRS.Domain.Interfaces;
 using MediatR;
 
-
 namespace CGRS.Application.Categories.Queries
 {
     public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery, CategoryInfoResponse>

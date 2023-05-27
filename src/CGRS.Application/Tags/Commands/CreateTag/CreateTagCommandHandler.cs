@@ -25,7 +25,6 @@ namespace CGRS.Application.Tags.Commands.CreateTag
             {
                 Id = Guid.NewGuid(),
                 Name = request.Name,
-                //Description = request.Description,
                 IsActive = true,
             });
 

@@ -11,7 +11,6 @@ namespace CGRS.Application.Categories.Commands.UpdateCategory
 
         public string Description { get; set; }
 
-
         public UpdateCategoryCommand(UpdateCategoryRequest updateCategoryRequest)
         {
             Id = updateCategoryRequest.Id;

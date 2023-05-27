@@ -66,7 +66,7 @@ namespace CGRS.RestApi.Controllers
         [HttpGet("{id}")]
         [AllowAnonymous]
         [ProducesResponseType(typeof(GameInfoResponse), 200)]
-        //[ProducesResponseType(typeof(Unit), 404)]
+        // [ProducesResponseType(typeof(Unit), 404)]
         public async Task<IActionResult> GetById(Guid id)
         {
             GameInfoResponse response = await _mediator.Send(new GetGameByIdQuery(id));

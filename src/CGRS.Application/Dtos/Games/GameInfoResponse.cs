@@ -21,6 +21,6 @@ namespace CGRS.Application.Dtos.Games
 
         public string CategoryName { get; set; }
 
-        public GamesMarkResponse GameMarkResponse { get; set; }
+        public GameMarkResponse GameMarkResponse { get; set; }
     }
 }

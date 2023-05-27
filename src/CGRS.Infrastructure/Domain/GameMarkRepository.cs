@@ -24,6 +24,13 @@ namespace CGRS.Infrastructure.Domain
             await _context.SaveChangesAsync();
         }
 
+        public async Task<GamesMark> GetByGameAndUserAsync(Guid gameId, Guid userId)
+        {
+            return await _context.GamesMarks
+                .Where(gm => gm.GameId == gameId && gm.UserId == userId)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<List<GamesMark>> GetByGameIdAsync(Guid gameId)
         {
             return await _context.GamesMarks.Where(gm => gm.GameId == gameId).ToListAsync();

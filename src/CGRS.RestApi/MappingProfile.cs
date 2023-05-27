@@ -24,7 +24,7 @@ namespace CGRS.RestApi
 
             CreateMap<User, UserInfoResponse>();
 
-            CreateMap<GamesMark, GamesMarkResponse>();
+            CreateMap<GamesMark, GameMarkResponse>();
 
             CreateMap<GamesComment, GameCommentResponse>();
         }
