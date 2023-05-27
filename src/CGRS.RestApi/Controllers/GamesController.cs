@@ -80,12 +80,13 @@ namespace CGRS.RestApi.Controllers
         [ProducesResponseType(typeof(Unit), 404)]
         public async Task<IActionResult> GetByIdPopulated(Guid id)
         {
-            GamePopulatedResponse response = await _mediator.Send(new GetGameByIdPopulatedQuery(id));
+            GamePopulatedResponse response = await _mediator.Send(new GetGameByIdPopulatedQuery(id, User));
 
             return Ok(response);
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(List<GameInfoResponse>), 200)]
         public async Task<IActionResult> GetAll([FromQuery] GamesFilter gamesFilter)
         {
@@ -105,6 +106,7 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpGet("populated")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(List<GamePopulatedResponse>), 200)]
         public async Task<IActionResult> GetAllPopulated()
         {

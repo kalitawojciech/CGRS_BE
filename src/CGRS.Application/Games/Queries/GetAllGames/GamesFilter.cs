@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CGRS.Application.Games.Queries.GetAllGames
+﻿namespace CGRS.Application.Games.Queries.GetAllGames
 {
     public class GamesFilter
     {
