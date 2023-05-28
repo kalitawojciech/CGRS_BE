@@ -21,7 +21,7 @@ namespace CGRS.Application.GamesMarks.Queries.GetGameMarkForCurrentUserByGameId
 
         public async Task<GameMarkResponse> Handle(GetGameMarkForCurrentUserByGameIdQuery request, CancellationToken cancellationToken)
         {
-            var gameMark = _gameMarkRepository.GetByGameAndUserAsync(request.GameId, new Guid(request.User.Identity.Name));
+            var gameMark = await _gameMarkRepository.GetByGameAndUserAsync(request.GameId, new Guid(request.User.Identity.Name));
 
             var result = _mapper.Map<GameMarkResponse>(gameMark);
             return result;
