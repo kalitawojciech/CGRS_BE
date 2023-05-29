@@ -46,9 +46,9 @@ namespace CGRS.RestApi.Controllers
         [ProducesResponseType(typeof(GameMarkResponse), 200)]
         public async Task<IActionResult> GetForCurrentUserByGameId([FromRoute] Guid gameId)
         {
-            await _mediator.Send(new GetGameMarkForCurrentUserByGameIdQuery(gameId, User));
+            var gameMark = await _mediator.Send(new GetGameMarkForCurrentUserByGameIdQuery(gameId, User));
 
-            return Ok();
+            return Ok(gameMark);
         }
     }
 }

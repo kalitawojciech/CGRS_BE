@@ -12,6 +12,7 @@ using CGRS.Application.Games.Queries.GetGameByIdPopulated;
 using CGRS.Application.Games.Queries.GetNamesFiltered;
 using CGRS.Application.Games.Queries.Recommended;
 using CGRS.Commons.Enumerables;
+using CGRS.Domain.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -90,7 +91,7 @@ namespace CGRS.RestApi.Controllers
         [ProducesResponseType(typeof(List<GameInfoResponse>), 200)]
         public async Task<IActionResult> GetAll([FromQuery] GamesFilter gamesFilter)
         {
-            List<GameInfoResponse> response = await _mediator.Send(new GetAllGamesQuery(gamesFilter, User));
+            List<GameInfoResponse> response = await _mediator.Send(new GetGamesFilteredQuery(gamesFilter, User));
 
             return Ok(response);
         }

@@ -34,7 +34,8 @@ namespace CGRS.RestApi
             ConfigureAutoMapper(services);
 
             services.AddMediatR(typeof(CreateCategoryCommand).Assembly);
-            services.AddControllers();
+            services.AddControllers(x => x.AllowEmptyInputInBodyModelBinding = true);
+                //.AddJsonOptions(opt => opt.JsonSerializerOptions.IgnoreNullValues);
 
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IIdentityRepository, IdentityRepository>();

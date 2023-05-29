@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using CGRS.Domain.Entities;
+using CGRS.Domain.Filters;
 
 namespace CGRS.Domain.Interfaces
 {
@@ -24,5 +26,7 @@ namespace CGRS.Domain.Interfaces
         Task<Game> GetByIdPopulatedAsync(Guid id);
 
         Task<List<Game>> GetByNameFilteredAsync(string name);
+
+        Task<List<Game>> GetFilteredAsync(GamesFilter filter, ClaimsPrincipal user);
     }
 }

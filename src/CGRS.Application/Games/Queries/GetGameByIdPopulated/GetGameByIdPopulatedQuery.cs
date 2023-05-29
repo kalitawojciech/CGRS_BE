@@ -9,9 +9,12 @@ namespace CGRS.Application.Games.Queries.GetGameByIdPopulated
     {
         public Guid Id { get; set; }
 
+        public ClaimsPrincipal User { get; set; }
+
         public GetGameByIdPopulatedQuery(Guid id, ClaimsPrincipal user)
         {
             Id = id;
+            User = user;
         }
     }
 }

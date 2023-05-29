@@ -1,6 +1,6 @@
-﻿namespace CGRS.Application.Games.Queries.GetAllGames
+﻿namespace CGRS.Domain.Filters
 {
-    public class GamesFilter
+    public class GamesFilter : FilterBase
     {
         public bool? IsActive { get; set; }
 

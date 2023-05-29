@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CGRS.Application.Dtos.Categories;
 using CGRS.Application.Dtos.GameComments;
+using CGRS.Application.Dtos.GamesMark;
 
 namespace CGRS.Application.Dtos.Games
 {
@@ -22,5 +23,7 @@ namespace CGRS.Application.Dtos.Games
         public CategoryInfoResponse Category { get; set; }
 
         public List<GameCommentResponse> GameComments { get; set; }
+
+        public GameMarkResponse UserGameMark { get; set; }
     }
 }
