@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CGRS.Application.Dtos;
 using CGRS.Application.Dtos.Games;
 using CGRS.Application.Games.Commands.ChangeGameActiveStatus;
 using CGRS.Application.Games.Commands.CreateGame;
@@ -88,10 +89,10 @@ namespace CGRS.RestApi.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(List<GameInfoResponse>), 200)]
+        [ProducesResponseType(typeof(PagedResponse<GameInfoResponse>), 200)]
         public async Task<IActionResult> GetAll([FromQuery] GamesFilter gamesFilter)
         {
-            List<GameInfoResponse> response = await _mediator.Send(new GetGamesFilteredQuery(gamesFilter, User));
+            PagedResponse<GameInfoResponse> response = await _mediator.Send(new GetGamesFilteredQuery(gamesFilter, User));
 
             return Ok(response);
         }

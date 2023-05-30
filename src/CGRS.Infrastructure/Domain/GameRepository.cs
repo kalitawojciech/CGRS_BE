@@ -36,7 +36,7 @@ namespace CGRS.Infrastructure.Domain
                 .ToListAsync();
         }
 
-        public async Task<List<Game>> GetFilteredAsync(GamesFilter filter, ClaimsPrincipal user)
+        public async Task<PagedEntity<Game>> GetFilteredAsync(GamesFilter filter, ClaimsPrincipal user)
         {
             IQueryable<Game> query = _context.Games;
 
@@ -51,21 +51,19 @@ namespace CGRS.Infrastructure.Domain
                 query = query.Where(g => g.IsActive == filter.IsActive);
             }
 
+            var allRecordsCount = query.Count();
+
             if (filter.PageNumber != null && filter.PageSize != null)
             {
-                query = query.Skip((filter.PageNumber.Value - 1) * filter.PageSize.Value).Take(filter.PageSize.Value);
+                query = query.Skip((filter.PageNumber.Value) * filter.PageSize.Value).Take(filter.PageSize.Value);
             }
 
-            //if (user.Identity.IsAuthenticated)
-            //{
-            //    var userId = new Guid(user.Identity.Name);
-            //    query = query.Include(g => g.GamesMarks.Where(gm => gm.UserId == userId));
-            //}
-
-            return await query.Include(g => g.Category)
+            var results = await query.Include(g => g.Category)
                 .OrderByDescending(g => g.IsActive)
                 .ThenBy(g => g.Name)
                 .ToListAsync();
+
+            return new PagedEntity<Game>() { Results = results, TotalDataCount = allRecordsCount };
         }
 
         public async Task<Game> GetByIdAsync(Guid id)

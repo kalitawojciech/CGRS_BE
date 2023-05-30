@@ -27,6 +27,6 @@ namespace CGRS.Domain.Interfaces
 
         Task<List<Game>> GetByNameFilteredAsync(string name);
 
-        Task<List<Game>> GetFilteredAsync(GamesFilter filter, ClaimsPrincipal user);
+        Task<PagedEntity<Game>> GetFilteredAsync(GamesFilter filter, ClaimsPrincipal user);
     }
 }

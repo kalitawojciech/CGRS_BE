@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
+using CGRS.Application.Dtos;
 using CGRS.Application.Dtos.Categories;
 using CGRS.Application.Dtos.GameComments;
 using CGRS.Application.Dtos.Games;
@@ -29,6 +30,8 @@ namespace CGRS.RestApi
                 .ForMember(dest => dest.AverageScore, opt => opt.MapFrom(src => src.Score));
 
             CreateMap<GamesComment, GameCommentResponse>();
+
+            CreateMap(typeof(PagedEntity<>), typeof(PagedResponse<>));
         }
     }
 }
