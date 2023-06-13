@@ -90,7 +90,7 @@ namespace CGRS.RestApi.Controllers
         [HttpGet]
         [AllowAnonymous]
         [ProducesResponseType(typeof(PagedResponse<GameInfoResponse>), 200)]
-        public async Task<IActionResult> GetAll([FromQuery] GamesFilter gamesFilter)
+        public async Task<IActionResult> GetFiltered([FromQuery] GamesFilter gamesFilter)
         {
             PagedResponse<GameInfoResponse> response = await _mediator.Send(new GetGamesFilteredQuery(gamesFilter, User));
 

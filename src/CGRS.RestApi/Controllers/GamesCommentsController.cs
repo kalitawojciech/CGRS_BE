@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using CGRS.Application.Dtos.GameComments;
 using CGRS.Application.GameComments.Commands.CreateGameComment;
 using CGRS.Application.GameComments.Commands.DeleteGameComment;
 using CGRS.Application.GameComments.Commands.UpdateGameComment;
@@ -27,6 +29,16 @@ namespace CGRS.RestApi.Controllers
         public async Task<IActionResult> Add([FromBody] CreateGameCommentRequest request)
         {
             await _mediator.Send(new CreateGameCommentCommand(request, User));
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(List<GameCommentResponse>), 400)]
+        public async Task<IActionResult> GetByGameId([FromQuery] Guid gameId)
+        {
+            //await _mediator.Send(new GetGameCommentsByGameIdQuery(request, User));
 
             return Ok();
         }

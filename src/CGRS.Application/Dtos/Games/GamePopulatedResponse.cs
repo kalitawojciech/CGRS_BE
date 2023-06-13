@@ -22,7 +22,7 @@ namespace CGRS.Application.Dtos.Games
 
         public CategoryInfoResponse Category { get; set; }
 
-        public List<GameCommentResponse> GameComments { get; set; }
+        public List<GameCommentResponse> GamesComments { get; set; }
 
         public GameMarkResponse UserGameMark { get; set; }
     }

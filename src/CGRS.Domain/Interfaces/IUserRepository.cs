@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CGRS.Domain.Entities;
+using CGRS.Domain.Filters;
 
 namespace CGRS.Domain.Interfaces
 {
@@ -15,5 +16,7 @@ namespace CGRS.Domain.Interfaces
         Task<User> GetByNickAsync(string nick);
 
         Task<List<User>> GetAllAsync();
+
+        Task<PagedEntity<User>> GetFilteredAsync(UsersFilter filter);
     }
 }

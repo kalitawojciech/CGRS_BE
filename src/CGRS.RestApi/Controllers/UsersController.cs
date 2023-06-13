@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using CGRS.Application.Dtos.Users;
 using CGRS.Application.Users.Commands;
 using CGRS.Application.Users.Queries;
+using CGRS.Commons.Enumerables;
+using CGRS.Domain.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +24,11 @@ namespace CGRS.RestApi.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = UserRole.Admin + "," + UserRole.SuperAdmin)]
         [ProducesResponseType(typeof(List<UserInfoResponse>), 200)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetFiltered([FromQuery] UsersFilter usersFilter)
         {
-            var response = await _mediator.Send(new GetAllUsersQuery());
+            var response = await _mediator.Send(new GetFilteredUsersQuery(usersFilter));
 
             return Ok(response);
         }
