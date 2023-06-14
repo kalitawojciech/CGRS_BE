@@ -7,6 +7,7 @@ using CGRS.Domain.Filters;
 using CGRS.Domain.Interfaces;
 using CGRS.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CGRS.Infrastructure.Domain
 {
@@ -32,11 +33,7 @@ namespace CGRS.Infrastructure.Domain
 
         public async Task<User> GetByEmailAsync(string email)
         {
-            User userFromDB = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-
-            // User userFromDB = await _context.Users.FirstOrDefaultAsync(u => u.Email.ToLowerInvariant() == email.ToLowerInvariant());
-
-            return userFromDB;
+            return await _context.Users.Where(u => u.Email.ToLower().Contains(email.ToLower())).FirstOrDefaultAsync();
         }
 
         public async Task<User> GetByEmailForAuthenticationAsync(string email)
@@ -50,20 +47,17 @@ namespace CGRS.Infrastructure.Domain
 
         public async Task<User> GetByNickAsync(string nick)
         {
-            // User userFromDB = await _context.Users.FirstOrDefaultAsync(u => u.Nick.ToLowerInvariant() == nick.ToLowerInvariant());
-            User userFromDB = await _context.Users.FirstOrDefaultAsync(u => u.Nick == nick);
-
-            return userFromDB;
+            return await _context.Users.Where(u => u.Nick.ToLower().Contains(nick.ToLower())).FirstOrDefaultAsync();
         }
 
         public async Task<PagedEntity<User>> GetFilteredAsync(UsersFilter filter)
         {
             IQueryable<User> query = _context.Users;
 
-            if (string.IsNullOrEmpty(filter.NickOrEmail))
+            if (!string.IsNullOrEmpty(filter.NickOrEmail))
             {
                 var sentence = filter.NickOrEmail.ToLowerInvariant();
-                query = query.Where(u => u.Nick.ToLowerInvariant() == sentence || u.Email.ToLowerInvariant() == sentence);
+                query = query.Where(u => EF.Functions.ILike(u.Nick, $"%{sentence}%") || EF.Functions.ILike(u.Email, $"%{sentence}%"));
             }
 
             var allRecordsCount = query.Count();

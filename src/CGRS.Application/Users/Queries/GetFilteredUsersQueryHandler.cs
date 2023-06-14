@@ -10,7 +10,7 @@ using MediatR;
 
 namespace CGRS.Application.Users.Queries
 {
-    public class GetFilteredUsersQueryHandler : IRequestHandler<GetFilteredUsersQuery, PagedResponse<UserInfoResponse>>
+    public class GetFilteredUsersQueryHandler : IRequestHandler<GetFilteredUsersQuery, PagedResponse<UserFullInfoResponse>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
@@ -21,11 +21,11 @@ namespace CGRS.Application.Users.Queries
             _mapper = mapper;
         }
 
-        public async Task<PagedResponse<UserInfoResponse>> Handle(GetFilteredUsersQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResponse<UserFullInfoResponse>> Handle(GetFilteredUsersQuery request, CancellationToken cancellationToken)
         {
             PagedEntity<User> usersFromDb = await _userRepository.GetFilteredAsync(request.UsersFilter);
 
-            var response = _mapper.Map<PagedResponse<UserInfoResponse>>(usersFromDb);
+            var response = _mapper.Map<PagedResponse<UserFullInfoResponse>>(usersFromDb);
             return response;
         }
     }

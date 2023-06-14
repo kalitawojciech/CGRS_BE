@@ -6,7 +6,7 @@ using MediatR;
 
 namespace CGRS.Application.Users.Queries
 {
-    public class GetFilteredUsersQuery : IRequest<PagedResponse<UserInfoResponse>>
+    public class GetFilteredUsersQuery : IRequest<PagedResponse<UserFullInfoResponse>>
     {
         public UsersFilter UsersFilter { get; set; }
 

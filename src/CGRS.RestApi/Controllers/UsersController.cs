@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CGRS.Application.Dtos;
 using CGRS.Application.Dtos.Users;
 using CGRS.Application.Users.Commands;
 using CGRS.Application.Users.Queries;
@@ -25,7 +26,7 @@ namespace CGRS.RestApi.Controllers
 
         [HttpGet]
         [Authorize(Roles = UserRole.Admin + "," + UserRole.SuperAdmin)]
-        [ProducesResponseType(typeof(List<UserInfoResponse>), 200)]
+        [ProducesResponseType(typeof(PagedResponse<UserFullInfoResponse>), 200)]
         public async Task<IActionResult> GetFiltered([FromQuery] UsersFilter usersFilter)
         {
             var response = await _mediator.Send(new GetFilteredUsersQuery(usersFilter));
