@@ -14,7 +14,6 @@ namespace CGRS.Application.Tags.Commands.EditTag
         public UpdateTagCommand(UpdateTagRequest createGameRequest)
         {
             Name = createGameRequest.Name;
-            Description = createGameRequest.Description;
         }
     }
 }

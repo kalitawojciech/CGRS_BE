@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Dtos\Tags\" />
     <Folder Include="Tags\Queries\" />
   </ItemGroup>
 

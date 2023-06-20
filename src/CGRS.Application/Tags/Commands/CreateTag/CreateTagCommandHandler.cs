@@ -38,11 +38,6 @@ namespace CGRS.Application.Tags.Commands.CreateTag
                 throw new BadRequestException("Tag name cannot be empty!");
             }
 
-            if (string.IsNullOrEmpty(request.Description))
-            {
-                throw new BadRequestException("Tag description cannot be empty!");
-            }
-
             if ((await _tagRepository.GetByNameAsync(request.Name)) != null)
             {
                 throw new BadRequestException("Tag with this name already used!");

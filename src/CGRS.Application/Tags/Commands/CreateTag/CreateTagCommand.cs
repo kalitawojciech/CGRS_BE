@@ -6,12 +6,9 @@ namespace CGRS.Application.Tags.Commands.CreateTag
     {
         public string Name { get; set; }
 
-        public string Description { get; set; }
-
         public CreateTagCommand(CreateTagRequest createGameRequest)
         {
             Name = createGameRequest.Name;
-            Description = createGameRequest.Description;
         }
     }
 }
