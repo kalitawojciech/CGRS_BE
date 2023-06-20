@@ -1,9 +1,10 @@
 ﻿using System;
 using CGRS.Application.Tags.Commands.UpdateTag;
+using MediatR;
 
 namespace CGRS.Application.Tags.Commands.EditTag
 {
-    public class UpdateTagCommand
+    public class UpdateTagCommand : IRequest
     {
         public Guid Id { get; set; }
 

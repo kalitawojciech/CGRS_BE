@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,6 +46,13 @@ namespace CGRS.Infrastructure.Domain
             return await _context.Tags
                  .Where(c => c.Name == name)
                  .FirstOrDefaultAsync();
+        }
+
+        public async Task<Tag> GetByIdAsync(Guid id)
+        {
+            return await _context.Tags
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CGRS.Domain.Entities;
 
@@ -15,5 +16,7 @@ namespace CGRS.Domain.Interfaces
         Task SaveChangesAsync();
 
         Task<Tag> GetByNameAsync(string name);
+
+        Task<Tag> GetByIdAsync(Guid id);
     }
 }
