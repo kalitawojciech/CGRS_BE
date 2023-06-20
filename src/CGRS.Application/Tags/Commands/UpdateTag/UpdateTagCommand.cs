@@ -10,10 +10,9 @@ namespace CGRS.Application.Tags.Commands.EditTag
 
         public string Name { get; set; }
 
-        public string Description { get; set; }
-
         public UpdateTagCommand(UpdateTagRequest createGameRequest)
         {
+            Id = createGameRequest.Id;
             Name = createGameRequest.Name;
         }
     }

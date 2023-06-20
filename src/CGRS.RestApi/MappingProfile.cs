@@ -5,6 +5,7 @@ using CGRS.Application.Dtos.Categories;
 using CGRS.Application.Dtos.GameComments;
 using CGRS.Application.Dtos.Games;
 using CGRS.Application.Dtos.GamesMark;
+using CGRS.Application.Dtos.Tags;
 using CGRS.Application.Dtos.Users;
 using CGRS.Domain.Entities;
 
@@ -31,6 +32,8 @@ namespace CGRS.RestApi
                 .ForMember(dest => dest.AverageScore, opt => opt.MapFrom(src => src.Score));
 
             CreateMap<GamesComment, GameCommentResponse>();
+
+            CreateMap<Tag, TagInfoResponse>();
 
             CreateMap(typeof(PagedEntity<>), typeof(PagedResponse<>));
         }

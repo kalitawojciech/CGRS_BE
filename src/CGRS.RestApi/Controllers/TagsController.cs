@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using CGRS.Application.Dtos.Tags;
 using CGRS.Application.Tags.Commands.CreateTag;
 using CGRS.Application.Tags.Commands.EditTag;
 using CGRS.Application.Tags.Commands.UpdateTag;
+using CGRS.Application.Tags.Queries.GetTagById;
 using CGRS.Commons.Enumerables;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -40,6 +43,17 @@ namespace CGRS.RestApi.Controllers
             await _mediator.Send(new UpdateTagCommand(request));
 
             return Ok();
+        }
+
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(TagInfoResponse), 200)]
+        [ProducesResponseType(typeof(Unit), 404)]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            TagInfoResponse response = await _mediator.Send(new GetTagByIdQuery(id));
+
+            return Ok(response);
         }
     }
 }

@@ -26,9 +26,4 @@
     <ProjectReference Include="..\CGRS.Domain\CGRS.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\Tags\" />
-    <Folder Include="Tags\Queries\" />
-  </ItemGroup>
-
 </Project>
