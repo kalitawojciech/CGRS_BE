@@ -44,14 +44,14 @@ namespace CGRS.Infrastructure.Domain
         public async Task<Tag> GetByNameAsync(string name)
         {
             return await _context.Tags
-                 .Where(c => c.Name == name)
+                 .Where(t => t.Name.ToLower() == name.ToLower())
                  .FirstOrDefaultAsync();
         }
 
         public async Task<Tag> GetByIdAsync(Guid id)
         {
             return await _context.Tags
-                .Where(c => c.Id == id)
+                .Where(t => t.Id == id)
                 .FirstOrDefaultAsync();
         }
     }

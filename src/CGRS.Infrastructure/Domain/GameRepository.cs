@@ -87,7 +87,7 @@ namespace CGRS.Infrastructure.Domain
         public async Task<Game> GetByNameAsync(string name)
         {
             return await _context.Games
-                .Where(c => c.Name == name)
+                .Where(c => c.Name.ToLower() == name.ToLower())
                 .FirstOrDefaultAsync();
         }
 

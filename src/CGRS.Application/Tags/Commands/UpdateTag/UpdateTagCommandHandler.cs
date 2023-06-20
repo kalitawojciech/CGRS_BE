@@ -48,7 +48,7 @@ namespace CGRS.Application.Tags.Commands.UpdateTag
             {
                 if (tagWithGivenName.Id != request.Id)
                 {
-                    throw new BadRequestException("Game with given name already exist!");
+                    throw new BadRequestException("Tag with given name already exist!");
                 }
             }
         }

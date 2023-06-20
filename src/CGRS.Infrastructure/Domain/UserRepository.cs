@@ -33,7 +33,7 @@ namespace CGRS.Infrastructure.Domain
 
         public async Task<User> GetByEmailAsync(string email)
         {
-            return await _context.Users.Where(u => u.Email.ToLower().Contains(email.ToLower())).FirstOrDefaultAsync();
+            return await _context.Users.Where(u => u.Email.ToLower() == email.ToLower()).FirstOrDefaultAsync();
         }
 
         public async Task<User> GetByEmailForAuthenticationAsync(string email)
@@ -47,7 +47,7 @@ namespace CGRS.Infrastructure.Domain
 
         public async Task<User> GetByNickAsync(string nick)
         {
-            return await _context.Users.Where(u => u.Nick.ToLower().Contains(nick.ToLower())).FirstOrDefaultAsync();
+            return await _context.Users.Where(u => u.Nick.ToLower() == nick.ToLower()).FirstOrDefaultAsync();
         }
 
         public async Task<PagedEntity<User>> GetFilteredAsync(UsersFilter filter)
