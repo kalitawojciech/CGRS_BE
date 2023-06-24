@@ -154,7 +154,8 @@ namespace CGRS.Infrastructure.Database
 
             modelBuilder.Entity<GamesTag>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.GameId, e.TagId })
+                    .HasName("games_tags_pkey");
 
                 entity.ToTable("games_tags");
 
@@ -163,13 +164,13 @@ namespace CGRS.Infrastructure.Database
                 entity.Property(e => e.TagId).HasColumnName("tag_id");
 
                 entity.HasOne(d => d.Game)
-                    .WithMany()
+                    .WithMany(p => p.GamesTags)
                     .HasForeignKey(d => d.GameId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("games_tags_game_id_fkey");
 
                 entity.HasOne(d => d.Tag)
-                    .WithMany()
+                    .WithMany(p => p.GamesTags)
                     .HasForeignKey(d => d.TagId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("games_tags_tag_id_fkey");

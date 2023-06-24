@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CGRS.Domain.Entities;
@@ -7,7 +6,6 @@ using CGRS.Domain.Filters;
 using CGRS.Domain.Interfaces;
 using CGRS.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CGRS.Infrastructure.Domain
 {

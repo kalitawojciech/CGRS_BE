@@ -80,6 +80,8 @@ namespace CGRS.Infrastructure.Domain
                 .Include(g => g.Category)
                 .Include(g => g.GamesComments)
                 .ThenInclude(c => c.User)
+                .Include(g => g.GamesTags)
+                .ThenInclude(t => t.Tag)
                 .Where(g => g.Id == id)
                 .FirstOrDefaultAsync();
         }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CGRS.Application.Dtos;
+﻿using CGRS.Application.Dtos;
 using CGRS.Application.Dtos.Users;
 using CGRS.Domain.Filters;
 using MediatR;

@@ -15,6 +15,8 @@ namespace CGRS.Domain.Interfaces
 
         Task SaveChangesAsync();
 
+        Task<List<Tag>> GetByIds(List<Guid> ids);
+
         Task<Tag> GetByNameAsync(string name);
 
         Task<Tag> GetByIdAsync(Guid id);

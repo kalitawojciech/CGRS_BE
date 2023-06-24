@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CGRS.Application.Dtos.Categories;
 using CGRS.Application.Dtos.GameComments;
 using CGRS.Application.Dtos.GamesMark;
+using CGRS.Application.Dtos.Tags;
 
 namespace CGRS.Application.Dtos.Games
 {
@@ -25,5 +26,7 @@ namespace CGRS.Application.Dtos.Games
         public List<GameCommentResponse> GamesComments { get; set; }
 
         public GameMarkResponse UserGameMark { get; set; }
+
+        public List<TagInfoResponse> GameTags { get; set; }
     }
 }

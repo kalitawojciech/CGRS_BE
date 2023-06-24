@@ -41,6 +41,13 @@ namespace CGRS.Infrastructure.Domain
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Tag>> GetByIds(List<Guid> ids)
+        {
+            return await _context.Tags
+                 .Where(t => ids.Contains(t.Id))
+                 .ToListAsync();
+        }
+
         public async Task<Tag> GetByNameAsync(string name)
         {
             return await _context.Tags

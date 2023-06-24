@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CGRS.Application.Games.Commands.CreateGame
 {
@@ -11,5 +12,7 @@ namespace CGRS.Application.Games.Commands.CreateGame
         public bool IsAdultOnly { get; set; }
 
         public Guid CategoryId { get; set; }
+
+        public List<Guid> TagsIds { get; set; }
     }
 }

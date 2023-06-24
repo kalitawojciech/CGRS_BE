@@ -1,5 +1,6 @@
 ﻿using System;
 using CGRS.Application.Dtos.GamesMark;
+using CGRS.Application.Dtos.Tags;
 
 namespace CGRS.Application.Dtos.Games
 {
@@ -22,5 +23,7 @@ namespace CGRS.Application.Dtos.Games
         public string CategoryName { get; set; }
 
         public GameMarkResponse GameMarkResponse { get; set; }
+
+        public TagInfoResponse TagsResponse { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace CGRS.Application.Users.Commands
                     new Claim(ClaimTypes.Name, userFromDb.Id.ToString()),
                     new Claim(ClaimTypes.Role, userFromDb.Role),
                 }),
-                Expires = DateTime.Now.AddHours(7),
+                Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             };
 

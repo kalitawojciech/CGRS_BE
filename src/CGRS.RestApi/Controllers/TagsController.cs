@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CGRS.Application.Dtos.Tags;
 using CGRS.Application.Tags.Commands.CreateTag;
 using CGRS.Application.Tags.Commands.EditTag;
 using CGRS.Application.Tags.Commands.UpdateTag;
+using CGRS.Application.Tags.Queries.GetAllTags;
 using CGRS.Application.Tags.Queries.GetTagById;
 using CGRS.Commons.Enumerables;
 using MediatR;
@@ -54,6 +56,16 @@ namespace CGRS.RestApi.Controllers
             TagInfoResponse response = await _mediator.Send(new GetTagByIdQuery(id));
 
             return Ok(response);
+        }
+
+        [HttpGet]
+        [Authorize]
+        [ProducesResponseType(typeof(List<TagInfoResponse>), 200)]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _mediator.Send(new GetAllTagsQuery());
+
+            return Ok(result);
         }
     }
 }
