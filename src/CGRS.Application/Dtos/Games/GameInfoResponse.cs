@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CGRS.Application.Dtos.GamesMark;
 using CGRS.Application.Dtos.Tags;
 
@@ -24,6 +25,6 @@ namespace CGRS.Application.Dtos.Games
 
         public GameMarkResponse GameMarkResponse { get; set; }
 
-        public TagInfoResponse TagsResponse { get; set; }
+        public List<TagInfoResponse> GameTags { get; set; }
     }
 }

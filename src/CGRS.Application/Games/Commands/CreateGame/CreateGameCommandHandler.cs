@@ -74,7 +74,7 @@ namespace CGRS.Application.Games.Commands.CreateGame
             await _gamesTagRepository.AddRangeAsync(gamesTags);
         }
 
-        public async Task Validate(CreateGameCommand request)
+        private async Task Validate(CreateGameCommand request)
         {
             if (string.IsNullOrEmpty(request.Name))
             {

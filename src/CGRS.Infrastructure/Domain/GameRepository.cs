@@ -71,6 +71,8 @@ namespace CGRS.Infrastructure.Domain
             return await _context.Games
                 .Include(g => g.Category)
                 .Where(c => c.Id == id)
+                .Include(g => g.GamesTags)
+                .ThenInclude(t => t.Tag)
                 .FirstOrDefaultAsync();
         }
 

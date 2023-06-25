@@ -35,7 +35,7 @@ namespace CGRS.Application.Categories.Commands.UpdateCategory
             return Unit.Value;
         }
 
-        public async Task Validate(UpdateCategoryCommand request)
+        private async Task Validate(UpdateCategoryCommand request)
         {
             if (string.IsNullOrEmpty(request.Name))
             {

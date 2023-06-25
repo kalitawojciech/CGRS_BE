@@ -32,7 +32,7 @@ namespace CGRS.Application.Categories.Commands.CreateCategory
             return Unit.Value;
         }
 
-        public async Task Validate(CreateCategoryCommand request)
+        private async Task Validate(CreateCategoryCommand request)
         {
             if (string.IsNullOrEmpty(request.Name))
             {

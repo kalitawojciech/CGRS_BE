@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CGRS.Application.Games.Commands.UpdateGame
 {
@@ -13,5 +14,7 @@ namespace CGRS.Application.Games.Commands.UpdateGame
         public bool IsAdultOnly { get; set; }
 
         public Guid CategoryId { get; set; }
+
+        public List<Guid> TagsIds { get; set; }
     }
 }

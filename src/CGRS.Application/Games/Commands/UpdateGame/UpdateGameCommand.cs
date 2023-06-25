@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using CGRS.Application.Games.Commands.CreateGame;
 using MediatR;
 
 namespace CGRS.Application.Games.Commands.UpdateGame
@@ -15,6 +17,8 @@ namespace CGRS.Application.Games.Commands.UpdateGame
 
         public Guid CategoryId { get; set; }
 
+        public List<Guid> TagsIds { get; set; }
+
         public UpdateGameCommand(UpdateGameRequest updateGameRequest)
         {
             Id = updateGameRequest.Id;
@@ -22,6 +26,7 @@ namespace CGRS.Application.Games.Commands.UpdateGame
             Description = updateGameRequest.Description;
             IsAdultOnly = updateGameRequest.IsAdultOnly;
             CategoryId = updateGameRequest.CategoryId;
+            TagsIds = updateGameRequest.TagsIds;
         }
     }
 }
