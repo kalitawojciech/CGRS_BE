@@ -2,6 +2,7 @@
 using CGRS.Application.Dtos;
 using CGRS.Application.Dtos.Users;
 using CGRS.Application.Users.Commands;
+using CGRS.Application.Users.Commands.ChangePassword;
 using CGRS.Application.Users.Queries;
 using CGRS.Commons.Enumerables;
 using CGRS.Domain.Filters;
@@ -50,6 +51,15 @@ namespace CGRS.RestApi.Controllers
         public async Task<IActionResult> Authenticate([FromBody] UserAuthenticationRequest request)
         {
             var response = await _mediator.Send(new AuthenticateUserCommand(request));
+            return Ok(response);
+        }
+
+        [HttpPut("change-password")]
+        [ProducesResponseType(typeof(Unit), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
+        {
+            var response = await _mediator.Send(new ChangePasswordCommand(request, User));
             return Ok(response);
         }
     }
