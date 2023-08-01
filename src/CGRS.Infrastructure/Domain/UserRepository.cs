@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CGRS.Domain.Entities;
@@ -32,6 +33,11 @@ namespace CGRS.Infrastructure.Domain
         public async Task<User> GetByEmailAsync(string email)
         {
             return await _context.Users.Where(u => u.Email.ToLower() == email.ToLower()).FirstOrDefaultAsync();
+        }
+
+        public async Task<User> GetByIdAsync(Guid id)
+        {
+            return await _context.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<User> GetByEmailForAuthenticationAsync(string email)

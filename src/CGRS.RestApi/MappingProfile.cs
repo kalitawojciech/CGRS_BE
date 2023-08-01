@@ -29,6 +29,7 @@ namespace CGRS.RestApi
 
             CreateMap<User, UserInfoResponse>();
             CreateMap<User, UserFullInfoResponse>();
+            CreateMap<User, UserProfileResponse>();
 
             CreateMap<GamesMark, GameMarkResponse>()
                 .ForMember(dest => dest.AverageScore, opt => opt.MapFrom(src => src.Score));

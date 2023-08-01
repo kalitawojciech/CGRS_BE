@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CGRS.Application.Games.Commands.CreateGame;
 using MediatR;
 
 namespace CGRS.Application.Games.Commands.UpdateGame

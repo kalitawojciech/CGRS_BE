@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CGRS.Domain.Entities;
 using CGRS.Domain.Filters;
@@ -14,6 +15,8 @@ namespace CGRS.Domain.Interfaces
         Task<User> GetByEmailForAuthenticationAsync(string email);
 
         Task<User> GetByNickAsync(string nick);
+
+        Task<User> GetByIdAsync(Guid id);
 
         Task<List<User>> GetAllAsync();
 

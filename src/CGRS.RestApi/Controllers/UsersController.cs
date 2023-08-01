@@ -4,6 +4,7 @@ using CGRS.Application.Dtos.Users;
 using CGRS.Application.Users.Commands;
 using CGRS.Application.Users.Commands.ChangePassword;
 using CGRS.Application.Users.Queries;
+using CGRS.Application.Users.Queries.GetCurrentUserData;
 using CGRS.Commons.Enumerables;
 using CGRS.Domain.Filters;
 using MediatR;
@@ -30,6 +31,16 @@ namespace CGRS.RestApi.Controllers
         public async Task<IActionResult> GetFiltered([FromQuery] UsersFilter usersFilter)
         {
             var response = await _mediator.Send(new GetFilteredUsersQuery(usersFilter));
+
+            return Ok(response);
+        }
+
+        [HttpGet("my-data")]
+        [ProducesResponseType(typeof(UserProfileResponse), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        public async Task<IActionResult> GetFiltered()
+        {
+            var response = await _mediator.Send(new GetCurrentUserDataQuery(User));
 
             return Ok(response);
         }
