@@ -1,4 +1,6 @@
-﻿namespace CGRS.Commons.Helpers
+﻿using System;
+
+namespace CGRS.Commons.Helpers
 {
     public static class PasswordHelper
     {
