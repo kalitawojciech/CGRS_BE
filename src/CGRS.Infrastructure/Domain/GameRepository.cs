@@ -118,5 +118,23 @@ namespace CGRS.Infrastructure.Domain
         {
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<Game>> GetGamesByIdsAsync(List<Guid> ids)
+        {
+            return await _context.Games
+                .Include(g => g.Category)
+                .Include(g => g.GamesTags)
+                .ThenInclude(t => t.Tag)
+                .Where(g => ids.Contains(g.Id)).OrderByDescending(x => x.AverageScore).ToListAsync();
+        }
+
+        public async Task<List<Game>> GetGamesNotInIdsListAsync(List<Guid> ids)
+        {
+            return await _context.Games
+                .Include(g => g.Category)
+                .Include(g => g.GamesTags)
+                .ThenInclude(t => t.Tag)
+                .Where(g => !ids.Contains(g.Id)).OrderByDescending(x => x.AverageScore).Take(8).ToListAsync();
+        }
     }
 }

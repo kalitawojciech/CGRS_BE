@@ -77,5 +77,10 @@ namespace CGRS.Infrastructure.Domain
 
             return new PagedEntity<User>() { Results = results, TotalDataCount = allRecordsCount };
         }
+
+        public async Task<List<User>> GetAllWithGamesMarksAsync()
+        {
+            return await _context.Users.Include(u => u.GamesMarks).ToListAsync();
+        }
     }
 }

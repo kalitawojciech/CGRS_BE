@@ -20,6 +20,8 @@ namespace CGRS.Domain.Interfaces
 
         Task<List<User>> GetAllAsync();
 
+        Task<List<User>> GetAllWithGamesMarksAsync();
+
         Task<PagedEntity<User>> GetFilteredAsync(UsersFilter filter);
     }
 }

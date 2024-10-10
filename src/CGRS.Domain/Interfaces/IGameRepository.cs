@@ -28,5 +28,9 @@ namespace CGRS.Domain.Interfaces
         Task<List<Game>> GetByNameFilteredAsync(string name);
 
         Task<PagedEntity<Game>> GetFilteredAsync(GamesFilter filter, ClaimsPrincipal user);
+
+        Task<List<Game>> GetGamesByIdsAsync(List<Guid> ids);
+
+        Task<List<Game>> GetGamesNotInIdsListAsync(List<Guid> ids);
     }
 }
